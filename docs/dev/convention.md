@@ -22,7 +22,7 @@ fix(api): handle null response
 
 ---
 
-## 🧩 Allowed Commit Types
+## Allowed Commit Types
 
 | Type       | Description                                     |
 | ---------- | ----------------------------------------------- |
@@ -34,7 +34,7 @@ fix(api): handle null response
 | `test`     | Adding or updating tests                        |
 | `chore`    | Maintenance tasks (e.g., dependencies, configs) |
 
-❗ Any commit using an **unknown type will be rejected** by our tooling.
+Any commit using an **unknown type will be rejected** by our tooling.
 
 ---
 

@@ -52,9 +52,11 @@ It represents the fusion of physical motion and digital language interpretation 
 
 ## Technologies
 
-* **Computer Vision:** DRAFT
-* **Backend Processing:** DRAFT
-* **Frontend (optional):** DRAFT
+**Maven**: Project Architecture.
+**Java**: Programming Language.
+**JavaFX**: User Interface/Controller.
+**Figma**: UI Design.
+**IDE**: Code Editor.
 ---
 
 ## Naming Note
@@ -89,7 +91,3 @@ Learn more about the development team behind this project by visiting our docume
 ## License
 
 This project is licensed under the [MIT License](./LICENSE).
-
----
-
-End of README
