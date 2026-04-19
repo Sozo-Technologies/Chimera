@@ -52,11 +52,11 @@ It represents the fusion of physical motion and digital language interpretation 
 
 ## Technologies
 
-**Maven**: Project Architecture.
-**Java**: Programming Language.
-**JavaFX**: User Interface/Controller.
-**Figma**: UI Design.
-**IDE**: Code Editor.
+- **Maven** – Project architecture and dependency management  
+- **Java** – Core programming language  
+- **JavaFX** – User interface and controller logic  
+- **Figma** – UI/UX design and prototyping  
+- **IDE** – Development environment (e.g., IntelliJ, Eclipse)
 ---
 
 ## Naming Note
