@@ -1,11 +1,11 @@
-# 🤝 Contributing Guide
+# Contributing Guide
 
 Thank you for contributing to this project!
 To keep our codebase clean, readable, and maintainable, we follow a **standardized commit format** using a custom CLI tool called `gitcon`.
 
 ---
 
-## 📌 Commit Convention (Required)
+## Commit Convention (Required)
 
 All commits **must follow this format**:
 
@@ -38,11 +38,11 @@ fix(api): handle null response
 
 ---
 
-## ⚙️ Using the `gitcon` CLI Tool
+## Using the `gitcon` CLI Tool
 
 We provide a custom CLI tool to simplify commits and enforce the format.
 
-### 📥 Command Syntax
+### Command Syntax
 
 ```
 gitcon <type> <scope> "<message>"
@@ -50,7 +50,7 @@ gitcon <type> <scope> "<message>"
 
 ---
 
-### ✅ Examples
+### Examples
 
 ```
 gitcon feat auth "add JWT authentication"
@@ -60,7 +60,7 @@ gitcon docs readme "update installation guide"
 
 ---
 
-### ⚠️ Important Rules
+### Important Rules
 
 * The **message must be wrapped in quotes**
 * The **type must be one of the allowed values**
@@ -68,7 +68,7 @@ gitcon docs readme "update installation guide"
 
 ---
 
-## 📘 Help Command
+## Help Command
 
 You can view available types anytime using:
 
@@ -78,7 +78,7 @@ gitcon help
 
 ---
 
-## 🚀 Workflow Example
+## Workflow Example
 
 1. Make your changes
 2. Stage + commit using `gitcon`:
@@ -90,7 +90,7 @@ gitcon help
 
 ---
 
-## 💡 Tips
+## Tips
 
 * Keep commit messages **short but descriptive**
 * Use **present tense** (e.g., "add", not "added")
@@ -98,7 +98,7 @@ gitcon help
 
 ---
 
-## 🧠 Why This Matters
+## Why This Matters
 
 Following a consistent commit format helps:
 

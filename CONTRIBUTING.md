@@ -14,6 +14,7 @@ Before contributing, please make sure you:
 * Understand the project goal and structure
 * Familiarize yourself with the codebase
 * Follow the Code of Conduct
+* Read the [Resources Page](./docs/dev/resources.md)
 
 ---
 
@@ -21,7 +22,7 @@ Before contributing, please make sure you:
 
 You can contribute to this project in the following ways:
 
-- Check your assigned tasks here: 👉 [View Member Tasks](./docs/members.md)
+- Check your assigned tasks here: [View Member Tasks](./docs/members.md)
 - Improve existing features or fix bugs
 - Help improve documentation
 - Test the system and report issues
@@ -29,7 +30,7 @@ You can contribute to this project in the following ways:
 
 ---
 
-## 🛠️ Development Workflow
+## Development Workflow
 
 1. Clone the repository
 2. Create a new branch
@@ -49,7 +50,7 @@ You can contribute to this project in the following ways:
 
 ---
 
-## 📏 Guidelines
+## Guidelines
 
 Please follow these rules when contributing:
 
@@ -61,7 +62,7 @@ Please follow these rules when contributing:
 
 ---
 
-## 💬 Communication
+## Communication
 
 If you have ideas, suggestions, or questions:
 
@@ -71,7 +72,7 @@ If you have ideas, suggestions, or questions:
 
 ---
 
-## 🎓 Note for Contributors
+## Note for Contributors
 
 This project is part of a **school-based learning environment**, so:
 
@@ -81,6 +82,6 @@ This project is part of a **school-based learning environment**, so:
 
 ---
 
-## 🙌 Thank You
+## Thank You
 
 Your contributions help improve **Chimera** and make it a better learning project for everyone involved.
