@@ -1,8 +1,8 @@
 # Official Members
 
-## 🧠 Lead Developer / System Engineer
+## Lead Developer / System Engineer
 
-### 👤 IzanamiiDevv (Project Leader)
+### IzanamiiDevv (Project Leader)
 
 **Responsibilities:**
 
@@ -19,9 +19,9 @@
 
 ---
 
-## 💻 Assistant Developer (Frontend Support)
+## Assistant Developer (Frontend Support)
 
-### 👤 Daniela
+### Daniela
 
 **Responsibilities:**
 
@@ -39,9 +39,9 @@
 
 ---
 
-## 💻 Assistant Developer (Backend / Integration)
+## Assistant Developer (Backend / Integration)
 
-### 👤 Kyle
+### Kyle
 
 **Responsibilities:**
 
@@ -58,9 +58,9 @@
 
 ---
 
-## 🔄 Flexible Developer (UI / Testing Support)
+## Flexible Developer (UI / Testing Support)
 
-### 👤 Zehreel
+### Zehreel
 
 **Responsibilities:**
 
@@ -77,9 +77,9 @@
 
 ---
 
-## 🧪 QA Tester / Documentation
+## QA Tester / Documentation
 
-### 👤 Matthew
+### Matthew
 
 **Responsibilities:**
 
@@ -96,11 +96,11 @@
 
 ---
 # Unofficial Members
-SICRET
+SECRET
 
 ---
 
-# 📌 Notes
+# Notes
 
 * All members are encouraged to learn and contribute gradually.
 * Tasks may shift depending on progress and skill development.

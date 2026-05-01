@@ -4,7 +4,7 @@
 
 ## Overview
 
-Chimera is an AI-powered system that translates hand signs and gestures into readable text in real time. It uses computer vision and machine learning to detect hand movements, interpret gesture patterns, and convert them into structured language output.
+Chimera is an system that translates hand signs and gestures into readable text in real time. It uses computer vision and machine algorithm to detect hand movements, interpret gesture patterns, and convert them into structured language output.
 
 The project focuses on improving human-computer interaction and accessibility for users who rely on sign-based communication.
 
@@ -15,7 +15,7 @@ The project focuses on improving human-computer interaction and accessibility fo
 Chimera is built on the idea of merging multiple systems into one unified communication pipeline:
 
 * **Hand Input** → Captured via camera stream
-* **AI Processing** → Gesture detection and classification
+* **Data Processing** → Gesture detection and classification
 * **Text Output** → Converted readable language
 
 It represents the fusion of physical motion and digital language interpretation into a single intelligent system.
@@ -61,15 +61,15 @@ It represents the fusion of physical motion and digital language interpretation 
 
 ## Naming Note
 
-The name **Chimera** represents the combination of multiple systems (vision, AI, and language processing) into a unified intelligent interface.
+The name **Chimera** represents the combination of multiple systems (vision, and language processing) into a unified intelligent interface.
 
-It symbolizes hybrid intelligence—where human gesture and machine interpretation merge into one communication system.
+It symbolizes hybrid intelligence, where human gesture and machine interpretation merge into one communication system.
 
 ---
 
 ## Conclusion
 
-Chimera aims to bridge non-verbal communication and digital text systems using AI. It enables real-time translation of hand gestures into meaningful language, opening possibilities for accessibility tools and human-computer interaction systems.
+Chimera aims to bridge non-verbal communication and digital text systems. It enables real-time translation of hand gestures into meaningful language, opening possibilities for accessibility tools and human-computer interaction systems.
 
 ---
 

@@ -2,9 +2,9 @@
 
 ## 1. Our Commitment
 
-The **Chimera project** is an open-source school group project focused on building an AI system that translates hand signs into text.
+The **Chimera project** is an open-source school group project focused on building an system that translates hand signs into text.
 
-We aim to create a **safe, respectful, and collaborative learning environment** where all contributors can improve their skills in programming, AI, and teamwork.
+We aim to create a **safe, respectful, and collaborative learning environment** where all contributors can improve their skills in programming, and teamwork.
 
 ---
 
