@@ -1,28 +1,21 @@
-package org.sozotech.frontend;
-
+package org.sozotech.pages.Test;
 import javafx.geometry.Pos;
-import javafx.scene.layout.VBox;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import org.opencv.core.Core;
-import org.sozotech.controllers.MainController;
+import org.sozotech.utils.PageComponent;
+import org.sozotech.utils.Renderer;
 
-public class MainFrame {
-
-    private VBox root;
-    private Label titleLabel;
-
-    private final MainController controller;
-
-    public MainFrame() {
-        initialize();
-        controller = new MainController(this);
+public class Test extends PageComponent {
+    static {
+        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
-
-    private void initialize() {
-        root = new VBox(10);
-
-        titleLabel = new Label("Welcome to SozoTech");
+    @Override
+    protected Parent createView() {
+        VBox root = new VBox(10);
+        Label titleLabel = new Label("SozoTech");
 
         String javaVersion = System.getProperty("java.version");
         String javafxVersion = System.getProperty("javafx.version");
@@ -41,17 +34,22 @@ public class MainFrame {
                 opencvLabel
         );
 
+        Button button = new Button("Go to Next Page");
+        button.setOnMouseClicked(event -> {
 
-        Button button = new Button("Click Me");
-        button.setOnAction(e -> controller.handleClick());
+        });
         root.getChildren().addAll(titleLabel, button);
-    }
 
-    public VBox getRoot() {
         return root;
     }
 
-    public void setTitle(String text) {
-        titleLabel.setText(text);
+    @Override
+    public void onMount() {
+
+    }
+
+    @Override
+    public void onUnmount() {
+
     }
 }
