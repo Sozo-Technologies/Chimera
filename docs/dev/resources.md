@@ -8,3 +8,12 @@ If you would like to suggest additional materials, please contact the Lead Devel
 
 ---
 
+# Online Resources
+
+## Programming Concept:
+
+## Git/Github:
+
+## Java:
+
+## JavaFX:
