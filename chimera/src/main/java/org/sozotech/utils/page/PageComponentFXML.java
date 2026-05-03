@@ -1,4 +1,4 @@
-package org.sozotech.utils;
+package org.sozotech.utils.page;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 

@@ -10,8 +10,8 @@ import javafx.geometry.Pos;
 import javafx.util.Duration;
 
 
-import org.sozotech.utils.AppContext;
-import org.sozotech.utils.PageComponent;
+import org.sozotech.utils.core.AppContext;
+import org.sozotech.utils.page.PageComponent;
 import org.sozotech.utils.Transition;
 
 import java.util.Map;

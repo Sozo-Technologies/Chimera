@@ -1,4 +1,4 @@
-package org.sozotech.utils;
+package org.sozotech.utils.core;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.TranslateTransition;
@@ -10,6 +10,8 @@ import javafx.util.Duration;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import org.sozotech.utils.Transition;
+import org.sozotech.utils.page.Page;
 
 public class Renderer {
     private final Stage stage;

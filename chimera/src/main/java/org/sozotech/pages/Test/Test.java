@@ -5,8 +5,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.opencv.core.Core;
-import org.sozotech.utils.PageComponent;
-import org.sozotech.utils.AppContext;
+import org.sozotech.utils.page.PageComponent;
+import org.sozotech.utils.core.AppContext;
 import org.sozotech.utils.Transition;
 
 import java.util.Map;

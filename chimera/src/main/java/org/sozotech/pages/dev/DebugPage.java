@@ -11,8 +11,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 import org.opencv.core.Core;
-import org.sozotech.utils.AppContext;
-import org.sozotech.utils.PageComponent;
+import org.sozotech.utils.core.AppContext;
+import org.sozotech.utils.page.PageComponent;
 
 public class DebugPage extends PageComponent {
     static {

@@ -5,7 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
-import org.sozotech.utils.PageComponent;
+import org.sozotech.utils.page.PageComponent;
 
 import java.util.Map;
 

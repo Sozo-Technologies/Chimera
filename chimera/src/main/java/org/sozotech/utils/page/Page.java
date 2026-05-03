@@ -1,4 +1,4 @@
-package org.sozotech.utils;
+package org.sozotech.utils.page;
 import javafx.scene.Parent;
 
 import java.util.Map;

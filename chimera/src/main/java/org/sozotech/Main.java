@@ -5,9 +5,9 @@ import javafx.stage.Stage;
 import org.opencv.core.Core;
 import javafx.scene.image.Image;
 
-import org.sozotech.utils.Renderer;
-import org.sozotech.utils.Router;
-import org.sozotech.utils.AppContext;
+import org.sozotech.utils.core.Renderer;
+import org.sozotech.utils.core.Router;
+import org.sozotech.utils.core.AppContext;
 
 import org.sozotech.pages.LoadingScreen.LoadingScreen;
 import org.sozotech.pages.Home.Home;
