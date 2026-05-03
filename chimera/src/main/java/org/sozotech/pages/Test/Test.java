@@ -7,7 +7,6 @@ import javafx.scene.layout.VBox;
 import org.opencv.core.Core;
 import org.sozotech.utils.PageComponent;
 import org.sozotech.utils.AppContext;
-import org.sozotech.utils.Router;
 import org.sozotech.utils.Transition;
 
 import java.util.Map;
@@ -32,7 +31,7 @@ public class Test extends PageComponent {
         String opencvVersion = Core.VERSION;
 
         Label title = new Label("🚀 Chimera System Info");
-        Label javaLabel = new Label("Java Version: " + javaVersion);
+            Label javaLabel = new Label("Java Version: " + javaVersion);
         Label javafxLabel = new Label("JavaFX Version: " + javafxVersion);
         Label opencvLabel = new Label("OpenCV Version: " + opencvVersion);
 

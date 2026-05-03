@@ -5,9 +5,11 @@ import javafx.animation.TranslateTransition;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class Renderer {
     private final Stage stage;
@@ -29,7 +31,6 @@ public class Renderer {
 
         Scene scene = stage.getScene();
 
-        // 🎨 Background container
         StackPane container = new StackPane();
         container.setStyle("-fx-background-color: " + hexColor + ";");
 
@@ -41,6 +42,7 @@ public class Renderer {
             if (scene == null) {
                 scene = new Scene(container);
                 stage.setScene(scene);
+                attachGlobalShortcuts(scene);
             } else {
                 scene.setRoot(container);
             }
@@ -51,7 +53,6 @@ public class Renderer {
             return;
         }
 
-        // old root must also be wrapped
         Parent oldRoot = scene.getRoot();
 
         container.getChildren().addAll(oldRoot, newRoot);
@@ -117,5 +118,15 @@ public class Renderer {
                 isTransitioning = false;
             }
         }
+    }
+
+    private void attachGlobalShortcuts(Scene scene) {
+        scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if (e.isControlDown() && e.getCode() == KeyCode.D) {
+                System.out.println("Opening Debug Page...");
+                e.consume();
+                AppContext.router.navigate("/debug");
+            }
+        });
     }
 }

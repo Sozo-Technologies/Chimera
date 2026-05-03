@@ -12,7 +12,7 @@ import org.sozotech.utils.AppContext;
 import org.sozotech.pages.LoadingScreen.LoadingScreen;
 import org.sozotech.pages.Home.Home;
 import org.sozotech.pages.Test.Test;
-import org.sozotech.utils.Transition;
+import org.sozotech.pages.dev.DebugPage;
 
 import java.util.Objects;
 
@@ -33,6 +33,7 @@ public class Main extends Application {
         AppContext.router.register("/loading_screen", LoadingScreen::new);
         AppContext.router.register("/test", Test::new);
         AppContext.router.register("/home", Home::new);
+        AppContext.router.register("/debug", DebugPage::new);
 
         AppContext.router.navigate("/loading_screen");
         stage.show();
