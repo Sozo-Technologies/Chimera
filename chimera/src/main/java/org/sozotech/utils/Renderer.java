@@ -10,6 +10,10 @@ public class Renderer {
     public Renderer(Stage stage) {
         this.stage = stage;
         this.stage.setFullScreen(true);
+        this.stage.setWidth(1000);
+        this.stage.setHeight(600);
+        this.stage.setResizable(false);
+        this.stage.fullScreenExitHintProperty().setValue(null);
     }
 
     public void render(Page page) {
@@ -23,7 +27,6 @@ public class Renderer {
         } else scene.setRoot(page.getView());
 
         this.stage.setFullScreen(true);
-
         page.onMount();
     }
 }

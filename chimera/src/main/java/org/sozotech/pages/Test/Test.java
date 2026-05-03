@@ -6,12 +6,19 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import org.opencv.core.Core;
 import org.sozotech.utils.PageComponent;
-import org.sozotech.utils.Renderer;
+import org.sozotech.utils.AppContext;
+import org.sozotech.utils.Router;
 
 public class Test extends PageComponent {
     static {
         System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
     }
+
+    @Override
+    public void parameters(Object... args) {
+
+    }
+
     @Override
     protected Parent createView() {
         VBox root = new VBox(10);
@@ -36,7 +43,7 @@ public class Test extends PageComponent {
 
         Button button = new Button("Go to Next Page");
         button.setOnMouseClicked(event -> {
-
+            AppContext.router.navigate("/home");
         });
         root.getChildren().addAll(titleLabel, button);
 
