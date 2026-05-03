@@ -16,14 +16,19 @@ public class Router {
         routes.put(path, pageSupplier);
     }
 
-    public void navigate(String path) {
-        Supplier<Page> pageSupplier = routes.get(path);
+    public void navigate(String path, Map<String, Object> params, Transition transition, String bgColor) {
+        Supplier<Page> supplier = routes.get(path);
 
-        if (pageSupplier == null) {
+        if (supplier == null) {
             throw new RuntimeException("Route not found: " + path);
         }
 
-        Page page = pageSupplier.get();
-        renderer.render(page);
+        Page page = supplier.get();
+
+        if (params != null) {
+            page.parameters(params);
+        }
+
+        renderer.render(page, transition, bgColor);
     }
 }

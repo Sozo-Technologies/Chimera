@@ -7,20 +7,23 @@ import javafx.scene.layout.VBox;
 
 import org.sozotech.utils.PageComponent;
 
+import java.util.Map;
+
 public class Home extends PageComponent {
 
     @Override
-    public void parameters(Object... args) {
+    public void parameters(Map<String, Object> args) {
 
     }
 
     @Override
     protected Parent createView() {
         VBox root = new VBox(10);
-        Label titleLabel = new Label("SozoTech");
         root.setAlignment(Pos.CENTER);
-        root.getChildren().addAll(titleLabel);
+        root.setStyle("-fx-background-color: #ffffff;");
 
+        Label titleLabel = new Label("Sozo Tech");
+        root.getChildren().addAll(titleLabel);
         return root;
     }
 

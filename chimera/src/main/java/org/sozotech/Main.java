@@ -3,13 +3,18 @@ package org.sozotech;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.opencv.core.Core;
+import javafx.scene.image.Image;
 
 import org.sozotech.utils.Renderer;
 import org.sozotech.utils.Router;
 import org.sozotech.utils.AppContext;
 
+import org.sozotech.pages.LoadingScreen.LoadingScreen;
 import org.sozotech.pages.Home.Home;
 import org.sozotech.pages.Test.Test;
+import org.sozotech.utils.Transition;
+
+import java.util.Objects;
 
 public class Main extends Application {
 
@@ -20,14 +25,16 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         stage.setTitle("Chimera.");
-        
+        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/logo.png"))));
+
         Renderer renderer = new Renderer(stage);
         AppContext.router = new Router(renderer);
 
+        AppContext.router.register("/loading_screen", LoadingScreen::new);
         AppContext.router.register("/test", Test::new);
         AppContext.router.register("/home", Home::new);
 
-        AppContext.router.navigate("/test");
+        AppContext.router.navigate("/loading_screen", null, Transition.NONE, "#333446");
         stage.show();
     }
 

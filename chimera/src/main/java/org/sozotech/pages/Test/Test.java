@@ -8,6 +8,9 @@ import org.opencv.core.Core;
 import org.sozotech.utils.PageComponent;
 import org.sozotech.utils.AppContext;
 import org.sozotech.utils.Router;
+import org.sozotech.utils.Transition;
+
+import java.util.Map;
 
 public class Test extends PageComponent {
     static {
@@ -15,7 +18,7 @@ public class Test extends PageComponent {
     }
 
     @Override
-    public void parameters(Object... args) {
+    public void parameters(Map<String, Object> args) {
 
     }
 
@@ -43,7 +46,7 @@ public class Test extends PageComponent {
 
         Button button = new Button("Go to Next Page");
         button.setOnMouseClicked(event -> {
-            AppContext.router.navigate("/home");
+            AppContext.router.navigate("/home", null, Transition.NONE, "#333446");
         });
         root.getChildren().addAll(titleLabel, button);
 
