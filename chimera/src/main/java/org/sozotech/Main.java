@@ -34,7 +34,7 @@ public class Main extends Application {
         AppContext.router.register("/test", Test::new);
         AppContext.router.register("/home", Home::new);
 
-        AppContext.router.navigate("/loading_screen", null, Transition.NONE, "#333446");
+        AppContext.router.navigate("/loading_screen");
         stage.show();
     }
 

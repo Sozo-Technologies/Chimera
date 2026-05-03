@@ -61,7 +61,7 @@ public class LoadingScreen extends PageComponent {
         );
 
         sequence.setOnFinished(event -> {
-            AppContext.router.navigate("/home", null, Transition.FADE, "#333446");
+            AppContext.router.navigate("/home", Transition.FADE, "#333446");
         });
 
         sequence.play();
