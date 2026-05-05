@@ -1,6 +1,6 @@
-# Project: Chimera
-
----
+<p align="center">
+  <img src="./assets/banner.png" alt="image" width="750"/>
+</p>
 
 ## Overview
 
