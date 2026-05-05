@@ -5,13 +5,13 @@ import javafx.stage.Stage;
 import org.opencv.core.Core;
 import javafx.scene.image.Image;
 
+import org.sozotech.pages.media.ExternalCameraPage;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
 import org.sozotech.utils.core.AppContext;
 
 import org.sozotech.pages.LoadingScreen.LoadingScreen;
 import org.sozotech.pages.Home.Home;
-import org.sozotech.pages.Test.Test;
 import org.sozotech.pages.dev.DebugPage;
 
 import java.util.Objects;
@@ -31,11 +31,11 @@ public class Main extends Application {
         AppContext.router = new Router(renderer);
 
         AppContext.router.register("/loading_screen", LoadingScreen::new);
-        AppContext.router.register("/test", Test::new);
         AppContext.router.register("/home", Home::new);
         AppContext.router.register("/debug", DebugPage::new);
+        AppContext.router.register("/media/external-camera", ExternalCameraPage::new);
 
-        AppContext.router.navigate("/loading_screen");
+        AppContext.router.navigate("/home");
         stage.show();
     }
 
