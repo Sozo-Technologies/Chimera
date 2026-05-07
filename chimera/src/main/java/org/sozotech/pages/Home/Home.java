@@ -27,7 +27,7 @@ public class Home extends PageComponent {
         Label titleLabel = new Label("Sozo Tech");
         Button startButton = new Button("Start");
         startButton.setOnAction(e -> {
-            AppContext.router.navigate("/media/external-camera");
+            AppContext.router.navigate("/media/handtrack");
         });
         root.getChildren().addAll(titleLabel, startButton);
         return root;

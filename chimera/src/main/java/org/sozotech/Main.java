@@ -6,6 +6,7 @@ import org.opencv.core.Core;
 import javafx.scene.image.Image;
 
 import org.sozotech.pages.media.ExternalCameraPage;
+import org.sozotech.pages.media.HandTrack;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
 import org.sozotech.utils.core.AppContext;
@@ -34,6 +35,7 @@ public class Main extends Application {
         AppContext.router.register("/home", Home::new);
         AppContext.router.register("/debug", DebugPage::new);
         AppContext.router.register("/media/external-camera", ExternalCameraPage::new);
+        AppContext.router.register("/media/handtrack", HandTrack::new);
 
         AppContext.router.navigate("/home");
         stage.show();
