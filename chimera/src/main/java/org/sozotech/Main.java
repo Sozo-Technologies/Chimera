@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 
 import org.sozotech.pages.media.ExternalCameraPage;
 import org.sozotech.pages.media.HandTrack;
+import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
 import org.sozotech.utils.core.AppContext;
@@ -21,7 +22,7 @@ import org.sozotech.utils.stager.Stager;
 public class Main extends Application {
 
     static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        OpenCVContext.load();
     }
 
     @Override

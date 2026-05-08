@@ -12,11 +12,12 @@ import javafx.scene.text.Font;
 
 import org.opencv.core.Core;
 import org.sozotech.utils.core.AppContext;
+import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.page.PageComponent;
 
 public class DebugPage extends PageComponent {
     static {
-        System.loadLibrary(Core.NATIVE_LIBRARY_NAME);
+        OpenCVContext.load();
     }
 
     private TextArea output;
