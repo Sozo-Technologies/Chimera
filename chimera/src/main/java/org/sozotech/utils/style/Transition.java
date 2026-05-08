@@ -1,4 +1,4 @@
-package org.sozotech.utils;
+package org.sozotech.utils.style;
 
 public enum Transition {
     NONE,

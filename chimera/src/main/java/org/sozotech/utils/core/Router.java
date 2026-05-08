@@ -1,6 +1,6 @@
 package org.sozotech.utils.core;
 
-import org.sozotech.utils.Transition;
+import org.sozotech.utils.style.Transition;
 import org.sozotech.utils.page.Page;
 
 import java.util.HashMap;

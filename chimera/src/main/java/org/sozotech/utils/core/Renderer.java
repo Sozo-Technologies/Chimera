@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import org.sozotech.utils.Transition;
+import org.sozotech.utils.style.Transition;
 import org.sozotech.utils.page.Page;
 
 public class Renderer {

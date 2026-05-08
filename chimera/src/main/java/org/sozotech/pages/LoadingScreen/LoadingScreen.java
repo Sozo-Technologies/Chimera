@@ -12,7 +12,7 @@ import javafx.util.Duration;
 
 import org.sozotech.utils.core.AppContext;
 import org.sozotech.utils.page.PageComponent;
-import org.sozotech.utils.Transition;
+import org.sozotech.utils.style.Transition;
 
 import java.util.Map;
 import java.util.Objects;

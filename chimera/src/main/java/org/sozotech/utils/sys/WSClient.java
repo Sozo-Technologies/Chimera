@@ -79,6 +79,7 @@ public class WSClient implements WebSocket.Listener {
         try {
 
             String json = data.toString();
+            Terminal.print_matrices(json);
 
             if (json.isBlank()) {
                 ws.request(1);
@@ -89,7 +90,6 @@ public class WSClient implements WebSocket.Listener {
             Object obj = parser.parse(json);
 
             JSONArray hands = (JSONArray) obj;
-            Matrices.print(hands);
 
             Platform.runLater(() -> renderHands(hands));
 
