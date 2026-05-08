@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
+import org.sozotech.utils.stager.Stager;
 import org.sozotech.utils.sys.Utils;
 import org.sozotech.utils.sys.WSClient;
 import org.sozotech.utils.page.PageComponent;
@@ -62,9 +63,7 @@ public class HandTrack extends PageComponent {
     }
 
     @Override
-    public void parameters(Map<String, Object> args) {
-        // optional config
-    }
+    public void parameters(Map<String, Object> args) {}
 
     @Override
     public void onMount() {
@@ -88,6 +87,8 @@ public class HandTrack extends PageComponent {
         if (wsClient != null) {
             wsClient.close();
         }
+
+        Stager.stopMediapipe();
     }
 
     private void startCamera() {

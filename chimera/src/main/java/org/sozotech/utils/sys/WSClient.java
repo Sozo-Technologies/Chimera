@@ -10,6 +10,7 @@ import org.opencv.core.Mat;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.sozotech.utils.core.Matrices;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -83,13 +84,12 @@ public class WSClient implements WebSocket.Listener {
                 ws.request(1);
                 return null;
             }
-
-            System.out.println("RAW JSON: " + json);
-
+            
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(json);
 
             JSONArray hands = (JSONArray) obj;
+            Matrices.print(hands);
 
             Platform.runLater(() -> renderHands(hands));
 

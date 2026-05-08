@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 
 import org.sozotech.utils.core.AppContext;
 import org.sozotech.utils.page.PageComponent;
+import org.sozotech.utils.stager.Stager;
 
 import java.util.Map;
 
@@ -27,6 +28,7 @@ public class Home extends PageComponent {
         Label titleLabel = new Label("Sozo Tech");
         Button startButton = new Button("Start");
         startButton.setOnAction(e -> {
+            if(!Stager.runMediapipe()) System.out.println("Mediapipe failed");
             AppContext.router.navigate("/media/handtrack");
         });
         root.getChildren().addAll(titleLabel, startButton);
