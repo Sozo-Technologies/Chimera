@@ -45,6 +45,32 @@ if /I "%1"=="setup" (
     goto end
 )
 
+if /I "%1"=="clean" (
+
+    echo.
+    echo =====================================
+    echo          CHIMERA CLEAN
+    echo =====================================
+    echo.
+
+    echo [CHIMERA] Terminating Java processes...
+    taskkill /F /IM java.exe >nul 2>&1
+    taskkill /F /IM javaw.exe >nul 2>&1
+
+    echo [CHIMERA] Cleaning port 8765...
+
+    for /f "tokens=5" %%A in ('netstat -ano ^| findstr :8765') do (
+        echo [CHIMERA] Killing PID %%A
+        taskkill /F /PID %%A >nul 2>&1
+    )
+
+    echo.
+    echo [CHIMERA] Cleanup complete.
+    echo.
+
+    goto end
+)
+
 :help
 echo.
 echo =====================================

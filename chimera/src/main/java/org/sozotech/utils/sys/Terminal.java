@@ -10,7 +10,7 @@ public class Terminal {
 
     }
 
-    public static void print_matrices(String matrices) {
+    public static void print_raw_matrices(String matrices) {
         if (matrices == null || matrices.equals("[]") || matrices.isEmpty()) {
             StringBuilder sb = new StringBuilder();
             sb.append("[");
@@ -25,4 +25,17 @@ public class Terminal {
 
         System.out.printf("[%sLANDMARK%s]: %s\n", Palette.colors.CYAN, Palette.RESET, matrices);
     }
+
+        public static void print_matrices(float[][] matrices) {
+            System.out.printf("[%sLANDMARK%s]: \n", Palette.colors.CYAN, Palette.RESET);
+            for (int i = 0; i < matrices.length; i++) {
+                float[] row = matrices[i];
+                System.out.print("[" + i + "] ");
+                for (int j = 0; j < row.length; j++) {
+                    System.out.print(row[j]);
+                    if (j < row.length - 1) System.out.print(", ");
+                }
+                System.out.println();
+            }
+        }
 }

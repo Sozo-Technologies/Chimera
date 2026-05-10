@@ -10,7 +10,8 @@ import org.opencv.core.Mat;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.sozotech.utils.core.Matrices;
+import org.sozotech.ml.preprocess.Matrix;
+import org.sozotech.ml.preprocess.Normalizer;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -79,16 +80,15 @@ public class WSClient implements WebSocket.Listener {
         try {
 
             String json = data.toString();
-            Terminal.print_matrices(json);
 
             if (json.isBlank()) {
                 ws.request(1);
                 return null;
             }
-            
+
+
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(json);
-
             JSONArray hands = (JSONArray) obj;
 
             Platform.runLater(() -> renderHands(hands));
@@ -102,19 +102,15 @@ public class WSClient implements WebSocket.Listener {
     }
 
     private void renderHands(JSONArray hands) {
-
         GraphicsContext gc = canvas.getGraphicsContext2D();
-
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 
         gc.setFill(Color.RED);
 
         for (Object hObj : hands) {
-
             JSONArray hand = (JSONArray) hObj;
 
             for (Object lmObj : hand) {
-
                 JSONObject lm = (JSONObject) lmObj;
 
                 double x = ((Number) lm.get("x")).doubleValue() * canvas.getWidth();
@@ -122,6 +118,30 @@ public class WSClient implements WebSocket.Listener {
 
                 gc.fillOval(x, y, 8, 8);
             }
+        }
+    }
+
+    private void renderHands(float[][] hands) {
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+        gc.setFill(Color.RED);
+
+        if (hands == null) {
+            return;
+        }
+
+        for (float[] lm : hands) {
+            if (lm == null || lm.length < 2) {
+                continue;
+            }
+
+            double x = lm[0] * canvas.getWidth();
+            double y = lm[1] * canvas.getHeight();
+
+            gc.fillOval(x, y, 8, 8);
         }
     }
 
