@@ -19,6 +19,60 @@ if /I "%1"=="run" (
 
 if /I "%1"=="setup" (
     echo.
+    echo [CHIMERA] Checking Python installation...
+    echo.
+
+    python --version >nul 2>&1
+    if errorlevel 1 (
+        echo [CHIMERA] Python not found. Installing Python 3 silently...
+        echo.
+
+        curl -o "%TEMP%\python_installer.exe" https://www.python.org/ftp/python/3.11.9/python-3.11.9-amd64.exe
+
+        if errorlevel 1 (
+            echo [CHIMERA] Failed to download Python installer.
+            goto end
+        )
+
+        "%TEMP%\python_installer.exe" /quiet InstallAllUsers=1 PrependPath=1 Include_test=0
+
+        if errorlevel 1 (
+            echo [CHIMERA] Failed to install Python.
+            goto end
+        )
+
+        echo [CHIMERA] Python installed successfully.
+        echo [CHIMERA] Refreshing environment...
+        echo.
+
+        call refreshenv >nul 2>&1
+    ) else (
+        echo [CHIMERA] Python is already installed.
+    )
+
+    echo.
+    echo [CHIMERA] Installing dependencies...
+    echo.
+
+    python -m pip install --upgrade pip --quiet
+
+    python -m pip install websockets --quiet
+    if errorlevel 1 ( echo [CHIMERA] Failed to install websockets. & goto end )
+    echo [CHIMERA] websockets         ... OK
+
+    python -m pip install mediapipe --quiet
+    if errorlevel 1 ( echo [CHIMERA] Failed to install mediapipe. & goto end )
+    echo [CHIMERA] mediapipe          ... OK
+
+    python -m pip install numpy --quiet
+    if errorlevel 1 ( echo [CHIMERA] Failed to install numpy. & goto end )
+    echo [CHIMERA] numpy              ... OK
+
+    python -m pip install opencv-python --quiet
+    if errorlevel 1 ( echo [CHIMERA] Failed to install opencv-python. & goto end )
+    echo [CHIMERA] opencv-python      ... OK
+
+    echo.
     echo [CHIMERA] Installing OpenCV JAR...
     echo.
 
@@ -68,6 +122,42 @@ if /I "%1"=="clean" (
     echo [CHIMERA] Cleanup complete.
     echo.
 
+    goto end
+)
+
+@if /I "%1"=="generate" (
+    cls
+
+    echo.
+    echo ==========================================
+    echo            CHIMERA GENERATOR
+    echo ==========================================
+    echo.
+
+    if not exist "trainer\trainer.py" (
+        echo [ERROR] trainer.py not found
+        goto end
+    )
+
+    if not exist "trainer\resources" (
+        echo [ERROR] resources folder not found
+        goto end
+    )
+
+    echo [INFO] Starting dataset generation...
+    echo.
+
+    python "trainer\trainer.py"
+
+    echo.
+    
+    if %ERRORLEVEL% EQU 0 (
+        echo [SUCCESS] Dataset generation completed
+    ) else (
+        echo [FAILED] Dataset generation failed
+    )
+
+    echo.
     goto end
 )
 
