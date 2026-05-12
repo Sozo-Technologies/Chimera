@@ -1,4 +1,4 @@
-package org.sozotech.utils.stager;
+package org.sozotech.stager;
 
 import java.io.*;
 import java.net.URI;
@@ -14,9 +14,7 @@ public class Stager {
     private static final int REQUIRED_MAJOR = 3;
     private static final int REQUIRED_MINOR = 13;
     private static Process mediapipeProcess;
-
     private static final String PYTHON_INSTALLER_URL = "https://www.python.org/ftp/python/3.13.3/python-3.13.3-amd64.exe";
-
     private static final String INSTALLER_NAME = "python-installer.exe";
 
     public static void Install() {
@@ -28,15 +26,10 @@ public class Stager {
 
             System.out.println("[Stager] Python 3.13+ not found.");
             System.out.println("[Stager] Downloading installer...");
-
             Path installerPath = Paths.get(System.getProperty("java.io.tmpdir"), INSTALLER_NAME);
-
             downloadFile(installerPath);
-
             System.out.println("[Stager] Running silent installer...");
-
             installPythonSilently(installerPath);
-
             System.out.println("[Stager] Python installation completed.");
 
         } catch (Exception _) {
@@ -46,33 +39,21 @@ public class Stager {
 
     private static boolean isPythonInstalled() {
         try {
-            Process process = new ProcessBuilder("python", "--version")
-                    .redirectErrorStream(true)
-                    .start();
-
-            BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process.getInputStream())
-            );
-
+            Process process = new ProcessBuilder("python", "--version").redirectErrorStream(true).start();
+            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String output = reader.readLine();
-
-            if (output == null)
-                return false;
-
+            if (output == null) return false;
             System.out.println("[Stager] Detected: " + output);
-
             Pattern pattern = Pattern.compile("Python (\\d+)\\.(\\d+)");
             Matcher matcher = pattern.matcher(output);
-
             if (matcher.find()) {
                 int major = Integer.parseInt(matcher.group(1));
                 int minor = Integer.parseInt(matcher.group(2));
-
-                return major > REQUIRED_MAJOR ||
-                        (major == REQUIRED_MAJOR && minor >= REQUIRED_MINOR);
+                return major > REQUIRED_MAJOR || (major == REQUIRED_MAJOR && minor >= REQUIRED_MINOR);
             }
 
         } catch (Exception ignored) {
+
         }
 
         return false;
@@ -84,28 +65,12 @@ public class Stager {
         }
     }
 
-    private static void installPythonSilently(Path installerPath)
-            throws IOException, InterruptedException {
-
-        ProcessBuilder builder = new ProcessBuilder(
-                installerPath.toString(),
-                "/quiet",
-                "InstallAllUsers=1",
-                "PrependPath=1",
-                "Include_test=0"
-        );
-
+    private static void installPythonSilently(Path installerPath) throws IOException, InterruptedException {
+        ProcessBuilder builder = new ProcessBuilder(installerPath.toString(), "/quiet", "InstallAllUsers=1", "PrependPath=1", "Include_test=0");
         builder.inheritIO();
-
         Process process = builder.start();
-
         int exitCode = process.waitFor();
-
-        if (exitCode != 0) {
-            throw new RuntimeException(
-                    "Python installer exited with code: " + exitCode
-            );
-        }
+        if (exitCode != 0) throw new RuntimeException("Python installer exited with code: " + exitCode);
     }
 
 

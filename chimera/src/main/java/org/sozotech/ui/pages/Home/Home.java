@@ -1,4 +1,4 @@
-package org.sozotech.pages.Home;
+package org.sozotech.ui.pages.Home;
 
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 
 import org.sozotech.utils.core.AppContext;
 import org.sozotech.utils.page.PageComponent;
-import org.sozotech.utils.stager.Stager;
+import org.sozotech.stager.Stager;
 
 import java.util.Map;
 

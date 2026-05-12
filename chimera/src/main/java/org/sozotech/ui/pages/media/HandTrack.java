@@ -1,4 +1,4 @@
-package org.sozotech.pages.media;
+package org.sozotech.ui.pages.media;
 
 import javafx.application.Platform;
 import javafx.scene.Parent;
@@ -12,9 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
-import org.sozotech.utils.stager.Stager;
-import org.sozotech.utils.sys.Utils;
-import org.sozotech.utils.sys.WSClient;
+import org.sozotech.stager.Stager;
+import org.sozotech.system.WSClient;
 import org.sozotech.utils.page.PageComponent;
 
 import org.sozotech.utils.core.AppContext;
@@ -34,12 +33,10 @@ public class HandTrack extends PageComponent {
 
     @Override
     protected Parent createView() {
-
         cameraView = new ImageView();
         canvas = new Canvas(640, 480);
 
         Button backButton = new Button("← Back");
-
         backButton.setStyle("""
             -fx-background-color: rgba(0,0,0,0.6);
             -fx-text-fill: white;
@@ -55,11 +52,7 @@ public class HandTrack extends PageComponent {
         AnchorPane.setTopAnchor(backButton, 10.0);
         AnchorPane.setLeftAnchor(backButton, 10.0);
 
-        return new StackPane(
-                cameraView,
-                canvas,
-                overlay
-        );
+        return new StackPane(cameraView, canvas, overlay);
     }
 
     @Override
@@ -67,34 +60,50 @@ public class HandTrack extends PageComponent {
 
     @Override
     public void onMount() {
-
         running = true;
-
         wsClient = new WSClient(canvas);
-
         startCamera();
     }
 
     @Override
     public void onUnmount() {
-
         running = false;
-
-        if (camera != null) {
-            camera.release();
-        }
-
-        if (wsClient != null) {
-            wsClient.close();
-        }
-
+        if (camera != null) camera.release();
+        if (wsClient != null) wsClient.close();
         Stager.stopMediapipe();
     }
 
+    private static BufferedImage matToBufferedImage(Mat mat) {
+
+        int type = BufferedImage.TYPE_3BYTE_BGR;
+
+        byte[] data = new byte[
+                mat.rows() *
+                        mat.cols() *
+                        (int) mat.elemSize()
+                ];
+
+        mat.get(0, 0, data);
+
+        BufferedImage image = new BufferedImage(
+                mat.cols(),
+                mat.rows(),
+                type
+        );
+
+        image.getRaster().setDataElements(
+                0,
+                0,
+                mat.cols(),
+                mat.rows(),
+                data
+        );
+
+        return image;
+    }
+
     private void startCamera() {
-
         camera = new VideoCapture(0);
-
         camera.set(3, 640);
         camera.set(4, 480);
 
@@ -104,24 +113,12 @@ public class HandTrack extends PageComponent {
         }
 
         new Thread(() -> {
-
             Mat frame = new Mat();
-
             while (running) {
-
                 camera.read(frame);
-
                 if (!frame.empty()) {
-
-                    BufferedImage img =
-                            Utils.matToBufferedImage(frame);
-
-                    WritableImage fxImage =
-                            javafx.embed.swing.SwingFXUtils.toFXImage(
-                                    img,
-                                    null
-                            );
-
+                    BufferedImage img = matToBufferedImage(frame);
+                    WritableImage fxImage = javafx.embed.swing.SwingFXUtils.toFXImage(img, null);
                     Platform.runLater(() -> {
                         cameraView.setImage(fxImage);
                     });
@@ -133,7 +130,6 @@ public class HandTrack extends PageComponent {
                     Thread.sleep(10);
                 } catch (Exception ignored) {}
             }
-
         }).start();
     }
 }

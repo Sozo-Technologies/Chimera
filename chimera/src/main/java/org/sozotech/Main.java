@@ -1,24 +1,21 @@
 package org.sozotech;
 
+import java.util.Objects;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
-import org.sozotech.pages.media.HandTrack;
 import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
 import org.sozotech.utils.core.AppContext;
 
-import org.sozotech.pages.LoadingScreen.LoadingScreen;
-import org.sozotech.pages.Home.Home;
-import org.sozotech.pages.dev.DebugPage;
+import org.sozotech.ui.PageRegistry;
 
-import java.util.Objects;
-import org.sozotech.utils.stager.Stager;
+import org.sozotech.stager.Stager;
 
 public class Main extends Application {
-
     static {
         OpenCVContext.load();
     }
@@ -27,15 +24,10 @@ public class Main extends Application {
     public void start(Stage stage) {
         stage.setTitle("Chimera.");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/logo.png"))));
-
         Renderer renderer = new Renderer(stage);
         AppContext.router = new Router(renderer);
-
-        AppContext.router.register("/loading_screen", LoadingScreen::new);
-        AppContext.router.register("/home", Home::new);
-        AppContext.router.register("/debug", DebugPage::new);
-        AppContext.router.register("/media/handtrack", HandTrack::new);
-
+        PageRegistry.loadRegisteredPages();
+        
         AppContext.router.navigate("/home");
         stage.show();
     }

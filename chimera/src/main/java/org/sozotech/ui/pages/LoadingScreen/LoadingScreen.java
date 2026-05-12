@@ -1,4 +1,4 @@
-package org.sozotech.pages.LoadingScreen;
+package org.sozotech.ui.pages.LoadingScreen;
 
 import javafx.animation.*;
 import javafx.scene.Parent;

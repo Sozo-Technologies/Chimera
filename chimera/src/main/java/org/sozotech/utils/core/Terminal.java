@@ -1,4 +1,4 @@
-package org.sozotech.utils.sys;
+package org.sozotech.utils.core;
 import org.sozotech.utils.style.Palette;
 
 public class Terminal {

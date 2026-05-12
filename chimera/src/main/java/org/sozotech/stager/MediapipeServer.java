@@ -1,4 +1,4 @@
-package org.sozotech.utils.stager;
+package org.sozotech.stager;
 
 public class MediapipeServer {
 

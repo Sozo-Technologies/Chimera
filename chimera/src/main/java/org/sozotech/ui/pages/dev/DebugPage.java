@@ -1,4 +1,4 @@
-package org.sozotech.pages.dev;
+package org.sozotech.ui.pages.dev;
 
 import java.util.Map;
 
