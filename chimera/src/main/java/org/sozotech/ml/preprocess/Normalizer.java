@@ -1,5 +1,8 @@
 package org.sozotech.ml.preprocess;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Normalizer {
 
     public static float[][] normalize(float[][] input) {
@@ -25,9 +28,9 @@ public class Normalizer {
             float z = input[i][2];
 
             if (x == -1f || y == -1f || z == -1f) {
-                output[i][0] = -1f;
-                output[i][1] = -1f;
-                output[i][2] = -1f;
+                output[i][0] = Float.NaN;
+                output[i][1] = Float.NaN;
+                output[i][2] = Float.NaN;
                 continue;
             }
 
@@ -37,5 +40,25 @@ public class Normalizer {
         }
 
         return output;
+    }
+
+    public static float[] flattenLandmarks(float[][] matrix) {
+        List<Float> values = new ArrayList<>();
+
+        for (int i = 0; i < 21; i++) {
+            float x = matrix[i][0];
+            float y = matrix[i][1];
+            float z = matrix[i][2];
+
+            if (Float.isNaN(x) || Float.isNaN(y) || Float.isNaN(z)) continue;
+
+            values.add(x);
+            values.add(y);
+            values.add(z);
+        }
+
+        float[] flat = new float[values.size()];
+        for (int i = 0; i < flat.length; i++) flat[i] = values.get(i);
+        return flat;
     }
 }
