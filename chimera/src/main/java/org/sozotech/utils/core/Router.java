@@ -24,18 +24,12 @@ public class Router {
         if (supplier == null) throw new RuntimeException("Route not found: " + path);
         Page page = supplier.get();
         if (params != null) page.parameters(params);
-        renderer.render(page, transition, bgColor);
+        renderer.render(page, transition, bgColor, path);
     }
 
-    public void navigate(String path, Map<String, Object> params) {
-        this.navigate(path, params, Transition.NONE, null);
-    }
+    public void navigate(String path, Map<String, Object> params) { this.navigate(path, params, Transition.NONE, null); }
+    public void navigate(String path) { this.navigate(path, null, Transition.NONE, null); }
+    public void navigate(String path, Transition transition, String bgColor) { this.navigate(path, null, transition, bgColor); }
 
-    public void navigate(String path) {
-        this.navigate(path, null, Transition.NONE, null);
-    }
-
-    public void navigate(String path, Transition transition, String bgColor) {
-        this.navigate(path, null, transition, bgColor);
-    }
+    public Renderer getRenderer() { return renderer; }
 }

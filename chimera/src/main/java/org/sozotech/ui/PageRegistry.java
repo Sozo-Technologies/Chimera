@@ -1,5 +1,6 @@
 package org.sozotech.ui;
 
+import org.sozotech.ui.pages.media.DevTrack;
 import org.sozotech.utils.core.AppContext;
 
 import org.sozotech.ui.pages.LoadingScreen.LoadingScreen;
@@ -13,5 +14,6 @@ public class PageRegistry {
         AppContext.router.register("/home", Home::new);
         AppContext.router.register("/debug", DebugPage::new);
         AppContext.router.register("/media/handtrack", HandTrack::new);
+        AppContext.router.register("/dev/media/handtrack", DevTrack::new);
     }
 }

@@ -13,29 +13,28 @@ import javafx.scene.input.KeyEvent;
 import org.sozotech.utils.style.Transition;
 import org.sozotech.utils.page.Page;
 
+import java.util.Map;
+
 public class Renderer {
     private final Stage stage;
     private Page currentPage;
     private boolean isTransitioning = false;
+    public boolean lock = false;
 
     public Renderer(Stage stage) {
         this.stage = stage;
         this.stage.setFullScreen(true);
     }
 
-    public void render(Page page, Transition transition, String hexColor) {
+    public void render(Page page, Transition transition, String hexColor, String path) {
         if (isTransitioning) return;
         isTransitioning = true;
 
-        if (currentPage != null) {
-            currentPage.onUnmount();
-        }
+        if (currentPage != null) currentPage.onUnmount();
 
         Scene scene = stage.getScene();
-
         StackPane container = new StackPane();
         container.setStyle("-fx-background-color: " + hexColor + ";");
-
         Parent newRoot = page.getView();
 
         if (scene == null || transition == Transition.NONE) {
@@ -44,7 +43,7 @@ public class Renderer {
             if (scene == null) {
                 scene = new Scene(container);
                 stage.setScene(scene);
-                attachGlobalShortcuts(scene);
+                attachGlobalShortcuts(scene, path);
             } else {
                 scene.setRoot(container);
             }
@@ -56,7 +55,6 @@ public class Renderer {
         }
 
         Parent oldRoot = scene.getRoot();
-
         container.getChildren().addAll(oldRoot, newRoot);
         scene.setRoot(container);
 
@@ -122,12 +120,13 @@ public class Renderer {
         }
     }
 
-    private void attachGlobalShortcuts(Scene scene) {
+    private void attachGlobalShortcuts(Scene scene, String path) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
+            if(lock) return;
             if (e.isControlDown() && e.getCode() == KeyCode.D) {
                 System.out.println("Opening Debug Page...");
                 e.consume();
-                AppContext.router.navigate("/debug");
+                AppContext.router.navigate("/debug", Map.of("recent-page", path));
             }
         });
     }

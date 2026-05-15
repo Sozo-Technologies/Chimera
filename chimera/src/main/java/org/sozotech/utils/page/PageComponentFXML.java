@@ -14,7 +14,6 @@ public abstract class PageComponentFXML implements Page {
         }
     }
 
-
     public Parent getView() {
         return this.root;
     }
