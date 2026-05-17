@@ -14,6 +14,7 @@ import org.opencv.videoio.VideoCapture;
 
 import org.sozotech.stager.Stager;
 import org.sozotech.system.WSClient;
+import org.sozotech.utils.core.Terminal;
 import org.sozotech.utils.page.PageComponent;
 
 import org.sozotech.utils.core.AppContext;
@@ -73,32 +74,12 @@ public class HandTrack extends PageComponent {
         Stager.stopMediapipe();
     }
 
-    private static BufferedImage matToBufferedImage(Mat mat) {
-
+    public static BufferedImage matToBufferedImage(Mat mat) {
         int type = BufferedImage.TYPE_3BYTE_BGR;
-
-        byte[] data = new byte[
-                mat.rows() *
-                        mat.cols() *
-                        (int) mat.elemSize()
-                ];
-
+        byte[] data = new byte[mat.rows() * mat.cols() * (int) mat.elemSize()];
         mat.get(0, 0, data);
-
-        BufferedImage image = new BufferedImage(
-                mat.cols(),
-                mat.rows(),
-                type
-        );
-
-        image.getRaster().setDataElements(
-                0,
-                0,
-                mat.cols(),
-                mat.rows(),
-                data
-        );
-
+        BufferedImage image = new BufferedImage(mat.cols(), mat.rows(), type);
+        image.getRaster().setDataElements(0, 0, mat.cols(), mat.rows(), data);
         return image;
     }
 
@@ -128,7 +109,7 @@ public class HandTrack extends PageComponent {
 
                 try {
                     Thread.sleep(10);
-                } catch (Exception ignored) {}
+                } catch (Exception ignored) { Terminal.error("[DATASET] Sleep interrupted"); }
             }
         }).start();
     }

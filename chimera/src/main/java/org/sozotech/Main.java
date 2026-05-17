@@ -28,7 +28,7 @@ public class Main extends Application {
         PageRegistry.loadRegisteredPages();
 
         NeuralNetwork.getInstance().start();
-        stage.setOnCloseRequest(event -> NeuralNetwork.getInstance().shutdown());
+        stage.setOnCloseRequest(event -> onClose());
         
         AppContext.router.navigate("/intropage");
         stage.show();
@@ -37,5 +37,9 @@ public class Main extends Application {
     public static void main(String[] args) {
         Stager.Install();
         launch();
+    }
+
+    private void onClose() {
+        NeuralNetwork.getInstance().shutdown();
     }
 }

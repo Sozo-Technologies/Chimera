@@ -1,13 +1,41 @@
 package org.sozotech.utils.core;
 import org.sozotech.utils.style.Palette;
 
-public class Terminal {
-    public static void print(String string) {
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
+public class Terminal {
+    private static final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+
+    private static String time() {
+        return LocalDateTime.now().format(FORMAT);
+    }
+    public static void info(String message) {
+        System.out.println("[INFO][" + time() + "] " + message);
     }
 
-    public static void println(String string) {
+    public static void warn(String message) {
+        System.out.println("[WARN][" + time() + "] " + message);
+    }
 
+    public static void error(String message) {
+        System.err.println("[ERROR][" + time() + "] " + message);
+    }
+
+    public static void error(String message, Throwable throwable) {
+        System.err.println("[ERROR][" + time() + "] " + message);
+
+        if (throwable != null) {
+            System.err.println("Cause: " + throwable.getMessage());
+
+            for (StackTraceElement element : throwable.getStackTrace()) {
+                System.err.println("\tat " + element);
+            }
+        }
+    }
+
+    public static void debug(String message) {
+        System.out.println("[DEBUG][" + time() + "] " + message);
     }
 
     public static void print_raw_matrices(String matrices) {

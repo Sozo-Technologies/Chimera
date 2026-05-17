@@ -14,25 +14,14 @@ public class OpenCVContext {
 
         try {
 
-            Path dllPath = Paths.get(
-                    "lib",
-                    "opencv",
-                    "x64",
-                    "opencv_java4120.dll"
-            ).toAbsolutePath();
-
+            Path dllPath = Paths.get("lib", "opencv", "x64", "opencv_java4120.dll").toAbsolutePath();
             System.out.println("[OpenCV] Loading DLL: " + dllPath);
 
             System.load(dllPath.toString());
-
             loaded = true;
 
             System.out.println("[OpenCV] Loaded Successfully!");
             System.out.println("[OpenCV] Version: " + Core.VERSION);
-
-        } catch (Exception e) {
-            System.err.println("[OpenCV] Failed to load OpenCV DLL");
-            e.printStackTrace();
-        }
+        } catch (Exception e) { Terminal.error("[OpenCV] Failed to load OpenCV DLL"); }
     }
 }

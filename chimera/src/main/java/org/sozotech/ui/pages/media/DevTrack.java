@@ -23,6 +23,7 @@ import org.sozotech.ml.preprocess.Normalizer;
 
 import org.sozotech.stager.Stager;
 import org.sozotech.system.WSClient;
+import org.sozotech.utils.core.Terminal;
 import org.sozotech.utils.page.PageComponent;
 import org.sozotech.utils.core.AppContext;
 
@@ -31,13 +32,12 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
-
 import java.util.Map;
 
-public class DevTrack extends PageComponent {
+import static org.sozotech.ui.pages.media.HandTrack.matToBufferedImage;
 
+public class DevTrack extends PageComponent {
     private ImageView cameraView;
     private Canvas canvas;
 
@@ -193,18 +193,7 @@ public class DevTrack extends PageComponent {
             tempImage.delete();
             System.out.println("[DATASET] Saved label: " + label);
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private static BufferedImage matToBufferedImage(Mat mat) {
-        int type = BufferedImage.TYPE_3BYTE_BGR;
-        byte[] data = new byte[mat.rows() * mat.cols() * (int) mat.elemSize()];
-        mat.get(0, 0, data);
-        BufferedImage image = new BufferedImage(mat.cols(), mat.rows(), type);
-        image.getRaster().setDataElements(0, 0, mat.cols(), mat.rows(), data);
-        return image;
+        } catch (IOException _) { Terminal.error("[DATASET] Could not save label: " + label); }
     }
 
     private void startCamera() {
@@ -223,7 +212,7 @@ public class DevTrack extends PageComponent {
                 if (paused) {
                     try {
                         Thread.sleep(50);
-                    } catch (Exception ignored) {}
+                    } catch (Exception _) { Terminal.error("[DATASET] Sleep interrupted"); }
                     continue;
                 }
 
@@ -238,9 +227,8 @@ public class DevTrack extends PageComponent {
 
                 try {
                     Thread.sleep(10);
-                } catch (Exception ignored) {}
+                } catch (Exception _) { Terminal.error("[DATASET] Sleep interrupted"); }
             }
-
         }).start();
     }
 }

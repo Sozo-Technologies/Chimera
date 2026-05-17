@@ -28,7 +28,7 @@ public class WSClient implements WebSocket.Listener {
         HttpClient.newHttpClient().newWebSocketBuilder().buildAsync(URI.create("ws://localhost:8765"), this).thenAccept(ws -> {
                     this.socket = ws;
                     System.out.println("WebSocket connected");
-                });
+        });
     }
 
     public void sendFrame(Mat frame) {
