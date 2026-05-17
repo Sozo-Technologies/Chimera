@@ -1,5 +1,6 @@
 package org.sozotech.ui;
 
+import org.sozotech.ui.pages.Home.HomeXML;
 import org.sozotech.ui.pages.media.DevTrack;
 import org.sozotech.utils.core.AppContext;
 
@@ -7,6 +8,7 @@ import org.sozotech.ui.pages.LoadingScreen.LoadingScreen;
 import org.sozotech.ui.pages.Home.Home;
 import org.sozotech.ui.pages.dev.DebugPage;
 import org.sozotech.ui.pages.media.HandTrack;
+import org.sozotech.ui.pages.introduction.IntroPage;
 
 public class PageRegistry {
     public static void loadRegisteredPages() {
@@ -15,5 +17,6 @@ public class PageRegistry {
         AppContext.router.register("/debug", DebugPage::new);
         AppContext.router.register("/media/handtrack", HandTrack::new);
         AppContext.router.register("/dev/media/handtrack", DevTrack::new);
+        AppContext.router.register("/intropage", IntroPage::new);
     }
 }

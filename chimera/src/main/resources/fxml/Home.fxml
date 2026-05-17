@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+
+<?import javafx.scene.Group?>
+<AnchorPane
+        prefWidth="1440.0"
+        prefHeight="840.0"
+        style="-fx-background-color: #060606;"
+        xmlns:fx="http://javafx.com/fxml">
+
+    <!-- Background Right -->
+    <Rectangle
+            layoutX="1080"
+            layoutY="0"
+            width="360"
+            height="420"
+            fill="#6103A0"/>
+
+    <!-- Background Left -->
+    <Rectangle
+            layoutX="0"
+            layoutY="420"
+            width="360"
+            height="420"
+            fill="#2F94D8"/>
+
+    <!-- Overlay Blur -->
+    <Rectangle
+            width="1440"
+            height="840"
+            opacity="0.2"
+            fill="#7220AB">
+        <effect>
+            <GaussianBlur radius="80"/>
+        </effect>
+    </Rectangle>
+
+    <!-- Decorative Circles -->
+    <Group layoutX="708" layoutY="-411">
+
+        <Circle
+                centerX="554"
+                centerY="554"
+                radius="490"
+                fill="transparent"
+                stroke="#D9D6D6"
+                strokeWidth="5"
+                opacity="0.5"/>
+
+        <Circle
+                centerX="554"
+                centerY="554"
+                radius="390"
+                fill="transparent"
+                stroke="#D9D6D6"
+                strokeWidth="5"
+                opacity="0.5"/>
+
+    </Group>
+
+    <!-- Hero Title -->
+    <Text
+            layoutX="100"
+            layoutY="370"
+            wrappingWidth="520"
+            fill="WHITE"
+            strokeType="OUTSIDE"
+            strokeWidth="0">
+
+        <font>
+            <Font name="Poppins Bold" size="64"/>
+        </font>
+
+        <text>
+            Gesture to Text
+            Translation
+        </text>
+
+        <fill>
+            <LinearGradient
+                    startX="0"
+                    startY="0"
+                    endX="1"
+                    endY="1"
+                    proportional="true"
+                    cycleMethod="NO_CYCLE">
+
+                <stops>
+                    <Stop offset="0" color="#E7D9F1"/>
+                    <Stop offset="0.5" color="#2F94D8"/>
+                    <Stop offset="1" color="#C0C0C6"/>
+                </stops>
+
+            </LinearGradient>
+        </fill>
+
+        <effect>
+            <DropShadow
+                    radius="4"
+                    offsetY="8"
+                    color="#000000"/>
+        </effect>
+
+    </Text>
+
+    <!-- Subtitle -->
+    <Text
+            layoutX="103"
+            layoutY="280"
+            text="Real-Time"
+            fill="WHITE">
+
+        <font>
+            <Font name="Poppins Medium" size="36"/>
+        </font>
+
+        <effect>
+            <DropShadow
+                    radius="4"
+                    offsetY="8"
+                    color="#000000"/>
+        </effect>
+
+    </Text>
+
+    <!-- Description -->
+    <Text
+            layoutX="108"
+            layoutY="470"
+            wrappingWidth="371"
+            fill="WHITE"
+            lineSpacing="8"
+            text="Bridging sign language and digital communication using AI-powered gesture recognition.">
+
+        <font>
+            <Font name="Poppins Regular" size="20"/>
+        </font>
+
+        <effect>
+            <DropShadow
+                    radius="4"
+                    offsetY="8"
+                    color="#000000"/>
+        </effect>
+
+    </Text>
+
+    <!-- CTA Button -->
+    <StackPane
+            layoutX="109"
+            layoutY="545"
+            prefWidth="170"
+            prefHeight="50"
+            style="
+            -fx-background-radius: 12;
+            -fx-border-radius: 12;
+            -fx-border-color: #2F94D8;
+            -fx-background-color:
+                linear-gradient(to right, #4FA5DF, #2F94D8);
+        ">
+
+        <effect>
+            <DropShadow
+                    radius="10"
+                    offsetY="8"
+                    color="#000000"/>
+        </effect>
+
+        <HBox
+                alignment="CENTER"
+                spacing="8">
+
+            <Label
+                    text="Start Translating"
+                    textFill="WHITE"
+                    style="
+                    -fx-font-family: 'Poppins Medium';
+                    -fx-font-size: 16px;
+                "/>
+
+            <Label
+                    text="→"
+                    textFill="WHITE"
+                    style="-fx-font-size: 16px;"/>
+
+        </HBox>
+
+    </StackPane>
+
+    <!-- Header -->
+    <HBox
+            layoutX="80"
+            layoutY="32"
+            alignment="CENTER_LEFT"
+            spacing="562">
+
+        <!-- Logo -->
+        <Label
+                text="HIMERA."
+                textFill="WHITE"
+                style="
+                -fx-font-family: 'Poppins Bold';
+                -fx-font-size: 32px;
+            "/>
+
+        <!-- Navigation -->
+        <HBox
+                alignment="CENTER"
+                spacing="50">
+
+            <!-- Home -->
+            <StackPane
+                    prefWidth="120"
+                    prefHeight="35"
+                    style="
+                    -fx-border-color: #E7D9F1;
+                    -fx-border-radius: 60;
+                    -fx-background-radius: 60;
+                ">
+
+                <Label
+                        text="Home"
+                        textFill="WHITE"
+                        style="
+                        -fx-font-family: 'Poppins Medium';
+                        -fx-font-size: 16px;
+                    "/>
+
+            </StackPane>
+
+            <Label
+                    text="Tools"
+                    textFill="rgba(255,255,255,0.5)"
+                    style="
+                    -fx-font-family: 'Poppins Medium';
+                    -fx-font-size: 16px;
+                "/>
+
+            <Label
+                    text="About"
+                    textFill="rgba(255,255,255,0.5)"
+                    style="
+                    -fx-font-family: 'Poppins Medium';
+                    -fx-font-size: 16px;
+                "/>
+
+            <Label
+                    text="Settings"
+                    textFill="rgba(255,255,255,0.5)"
+                    style="
+                    -fx-font-family: 'Poppins Medium';
+                    -fx-font-size: 16px;
+                "/>
+
+        </HBox>
+
+    </HBox>
+
+</AnchorPane>

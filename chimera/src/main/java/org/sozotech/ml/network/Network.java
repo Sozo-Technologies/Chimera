@@ -26,44 +26,29 @@ public class Network {
             int current = layers[l].size();
             int next = layers[l + 1].size();
             layers[l].weights = new float[current][next];
-
             float scale = (float) Math.sqrt(2.0 / current);
-            for (int i = 0; i < current; i++) {
-                for (int j = 0; j < next; j++) {
-                    layers[l].weights[i][j] = (float) rand.nextGaussian() * scale;
-                }
-            }
+            for (int i = 0; i < current; i++)
+                for (int j = 0; j < next; j++) layers[l].weights[i][j] = (float) rand.nextGaussian() * scale;
         }
     }
 
     public float[] forward(float[] input) {
-        if (input.length != 63) {
-            throw new IllegalArgumentException("Expected 63 inputs, got " + input.length);
-        }
-
-        for (int i = 0; i < 63; i++) {
-            layers[0].neurons[i].value = input[i];
-        }
-
+        if (input.length != 63) throw new IllegalArgumentException("Expected 63 inputs, got " + input.length);
+        for (int i = 0; i < 63; i++) layers[0].neurons[i].value = input[i];
         for (int l = 0; l < layers.length - 1; l++) {
             Layer current = layers[l];
             Layer next = layers[l + 1];
-
             float[] rawValues = new float[next.size()];
 
             for (int j = 0; j < next.size(); j++) {
                 float sum = next.neurons[j].bias;
-                for (int i = 0; i < current.size(); i++) {
-                    sum += current.neurons[i].value * current.weights[i][j];
-                }
+                for (int i = 0; i < current.size(); i++) sum += current.neurons[i].value * current.weights[i][j];
                 next.neurons[j].raw = sum;
                 rawValues[j] = sum;
             }
 
             float[] activated = next.activation.activateLayer(rawValues);
-            for (int j = 0; j < next.size(); j++) {
-                next.neurons[j].value = activated[j];
-            }
+            for (int j = 0; j < next.size(); j++) next.neurons[j].value = activated[j];
         }
 
         return layers[layers.length - 1].getValues();

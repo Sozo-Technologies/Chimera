@@ -28,7 +28,7 @@ public class Main extends Application {
         AppContext.router = new Router(renderer);
         PageRegistry.loadRegisteredPages();
         
-        AppContext.router.navigate("/home");
+        AppContext.router.navigate("/intropage");
         stage.show();
     }
 
