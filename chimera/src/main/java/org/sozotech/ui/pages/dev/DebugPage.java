@@ -12,6 +12,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
+import org.sozotech.ml.core.NeuralNetwork;
 import org.sozotech.utils.core.AppContext;
 import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.page.PageComponent;
@@ -35,6 +36,9 @@ public class DebugPage extends PageComponent {
     private CommandRegistry registry;
     private CommandParser parser;
     private IntelliSenseEngine intellisense;
+
+    private volatile boolean estimateRunning = false;
+    private Thread estimateThread  = null;
 
     private static class ParsedCommand {
         String root;
@@ -378,7 +382,14 @@ public class DebugPage extends PageComponent {
     private void registerCommands() {
         registry.register("model")
                 .option("train", opt -> opt.arg("--camera"))
-                .option("view", opt -> opt.arg("--dataset").arg("--statistics"));
+                .option("view", opt -> opt
+                        .arg("--dataset")
+                        .arg("--statistics")
+                        .arg("--estimate"));          // ← add this
+
+        registry.register("estimate")
+                .option("start")
+                .option("stop");
 
         registry.register("help");
         registry.register("clear");
@@ -394,6 +405,7 @@ public class DebugPage extends PageComponent {
     @Override
     public void onUnmount() {
         AppContext.router.getRenderer().lock = false;
+        stopEstimateLoop();  // ← add this
     }
 
     private void print(String text) {
@@ -435,6 +447,9 @@ public class DebugPage extends PageComponent {
         print("model train --camera");
         print("model view --dataset");
         print("model view --statistics");
+        print("model view --estimate start   > begin live estimate loop");
+        print("model view --estimate stop    > stop live estimate loop");
+        print("model view --estimate         > one-shot estimate print");
         print("help");
         print("clear");
         print("exit");
@@ -447,7 +462,7 @@ public class DebugPage extends PageComponent {
 
     private void exitScreen() {
         print("Exiting...");
-        AppContext.router.navigate(recent_page);
+        AppContext.router.navigate("/home");
     }
 
     private void model_cmd(ParsedCommand cmd) {
@@ -470,10 +485,63 @@ public class DebugPage extends PageComponent {
                 print("Opening statistics viewer...");
                 return;
             }
+
+            if (cmd.flags.contains("--estimate")) {
+                if ("start".equals(cmd.argument)) {
+                    startEstimateLoop();
+                } else if ("stop".equals(cmd.argument)) {
+                    stopEstimateLoop();
+                } else {
+                    printEstimate();
+                }
+                return;
+            }
             print("Missing flag: --dataset or --statistics");
             return;
         }
 
         print("Unknown model option. Try: model train --camera, model view --dataset");
+    }
+
+    private void printEstimate() {
+        NeuralNetwork.EstimateResult est = NeuralNetwork.getInstance().estimateModel();
+        Platform.runLater(() -> print(est.toString()));
+    }
+
+    private void startEstimateLoop() {
+        if (estimateRunning) {
+            print("[estimate] Already running. Use 'model view --estimate stop' to stop.");
+            return;
+        }
+
+        estimateRunning = true;
+        print("[estimate] Started. Use 'model view --estimate stop' to stop.");
+
+        estimateThread = new Thread(() -> {
+            while (estimateRunning && !Thread.currentThread().isInterrupted()) {
+                NeuralNetwork.EstimateResult est = NeuralNetwork.getInstance().estimateModel();
+                Platform.runLater(() -> print("[estimate] " + est));
+                try {
+                    Thread.sleep(1000); // print every 1 second
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    break;
+                }
+            }
+        }, "chimera-estimate-loop");
+
+        estimateThread.setDaemon(true);
+        estimateThread.start();
+    }
+
+    private void stopEstimateLoop() {
+        if (!estimateRunning) {
+            print("[estimate] Not running.");
+            return;
+        }
+
+        estimateRunning = false;
+        if (estimateThread != null) estimateThread.interrupt();
+        print("[estimate] Stopped.");
     }
 }

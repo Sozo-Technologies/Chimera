@@ -6,6 +6,7 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
+import org.sozotech.ml.core.NeuralNetwork;
 import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
@@ -16,9 +17,7 @@ import org.sozotech.ui.PageRegistry;
 import org.sozotech.stager.Stager;
 
 public class Main extends Application {
-    static {
-        OpenCVContext.load();
-    }
+    static { OpenCVContext.load(); }
 
     @Override
     public void start(Stage stage) {
@@ -27,6 +26,9 @@ public class Main extends Application {
         Renderer renderer = new Renderer(stage);
         AppContext.router = new Router(renderer);
         PageRegistry.loadRegisteredPages();
+
+        NeuralNetwork.getInstance().start();
+        stage.setOnCloseRequest(event -> NeuralNetwork.getInstance().shutdown());
         
         AppContext.router.navigate("/intropage");
         stage.show();

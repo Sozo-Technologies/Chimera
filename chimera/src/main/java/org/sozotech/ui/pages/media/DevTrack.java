@@ -13,9 +13,13 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import org.jetbrains.annotations.NotNull;
+
 import org.opencv.core.Mat;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.videoio.VideoCapture;
+
+import org.sozotech.ml.preprocess.Matrix;
+import org.sozotech.ml.preprocess.Normalizer;
 
 import org.sozotech.stager.Stager;
 import org.sozotech.system.WSClient;
@@ -28,8 +32,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.nio.file.Files;
 
 import java.util.Map;
 
@@ -51,7 +54,6 @@ public class DevTrack extends PageComponent {
         cameraView = new ImageView();
         canvas = new Canvas(640, 480);
         Button backButton = new Button("← Back");
-
         backButton.setStyle("""
             -fx-background-color: rgba(0,0,0,0.6);
             -fx-text-fill: white;
@@ -60,12 +62,16 @@ public class DevTrack extends PageComponent {
         """);
 
         backButton.setOnAction(e -> AppContext.router.navigate("/debug", Map.of("recent-page", "/home")));
+
         StackPane root = new StackPane(cameraView, canvas);
         AnchorPane overlay = new AnchorPane(backButton);
+
         AnchorPane.setTopAnchor(backButton, 10.0);
         AnchorPane.setLeftAnchor(backButton, 10.0);
+
         StackPane container = getStackPane(root, overlay);
         Platform.runLater(container::requestFocus);
+
         return container;
     }
 
@@ -82,6 +88,7 @@ public class DevTrack extends PageComponent {
             paused = true;
             Platform.runLater(() -> showCapturePopup(String.valueOf(ch)));
         });
+
         return container;
     }
 
@@ -108,6 +115,7 @@ public class DevTrack extends PageComponent {
         Stage popup = new Stage();
         popup.initModality(Modality.APPLICATION_MODAL);
         popup.setTitle("Capture Dataset");
+
         Label text = new Label("Capture this frame for label: \"" + label + "\" ?");
         Button yes = new Button("Capture");
         Button no = new Button("Cancel");
@@ -143,24 +151,51 @@ public class DevTrack extends PageComponent {
 
     private void captureDataset(String label) {
         try {
-            File datasetDir = new File("dataset");
+            File datasetDir = new File("src/main/resources/datasets");
             if (!datasetDir.exists()) datasetDir.mkdirs();
-            String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss_SSS"));
-            String imageName = label + "_" + timestamp + ".png";
-            File imageFile = new File(datasetDir, imageName);
-            Imgcodecs.imwrite(imageFile.getAbsolutePath(), currentFrame);
-            File csvFile = new File(datasetDir, "dataset.csv");
+
+            File tempImage = Files.createTempFile("chimera_capture_", ".png").toFile();
+            Imgcodecs.imwrite(tempImage.getAbsolutePath(), currentFrame);
+
+            String landmarkData = wsClient.getLatestLandmarks();
+
+            if (landmarkData == null || landmarkData.isBlank()) {
+
+                System.out.println("[DATASET] No landmarks detected.");
+
+                tempImage.delete();
+
+                return;
+            }
+
+            float[][] matrix = Matrix.convert(landmarkData);
+            float[][] normalized = Normalizer.normalize(matrix);
+            float[] flat = Normalizer.flattenLandmarks(normalized);
+
+            File csvFile = new File(datasetDir,"app-dataset.csv");
+            boolean createHeader = !csvFile.exists();
 
             try (FileWriter writer = new FileWriter(csvFile, true)) {
-                writer.append(imageFile.getAbsolutePath());
-                writer.append(",");
+                if (createHeader) {
+                    for (int i = 0; i < flat.length; i++) writer.append("f").append(String.valueOf(i)).append(",");
+                    writer.append("label\n");
+                }
+
+                for (float value : flat) {
+                    writer.append(String.valueOf(value));
+                    writer.append(",");
+                }
+
                 writer.append(label);
                 writer.append("\n");
             }
 
-            System.out.println("[DATASET] Saved: " + imageName);
+            tempImage.delete();
+            System.out.println("[DATASET] Saved label: " + label);
 
-        } catch (IOException _) { }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private static BufferedImage matToBufferedImage(Mat mat) {
@@ -186,7 +221,9 @@ public class DevTrack extends PageComponent {
             Mat frame = new Mat();
             while (running) {
                 if (paused) {
-                    try { Thread.sleep(50); } catch (Exception ignored) {}
+                    try {
+                        Thread.sleep(50);
+                    } catch (Exception ignored) {}
                     continue;
                 }
 
@@ -199,8 +236,11 @@ public class DevTrack extends PageComponent {
                     wsClient.sendFrame(frame);
                 }
 
-                try { Thread.sleep(10); } catch (Exception ignored) {}
+                try {
+                    Thread.sleep(10);
+                } catch (Exception ignored) {}
             }
+
         }).start();
     }
 }

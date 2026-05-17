@@ -21,6 +21,7 @@ import java.util.concurrent.CompletionStage;
 public class WSClient implements WebSocket.Listener {
     private WebSocket socket;
     private final Canvas canvas;
+    private volatile String latestLandmarks;
 
     public WSClient(Canvas canvas) {
         this.canvas = canvas;
@@ -66,6 +67,7 @@ public class WSClient implements WebSocket.Listener {
                 ws.request(1);
                 return null;
             }
+            latestLandmarks = json;
             JSONParser parser = new JSONParser();
             Object obj = parser.parse(json);
             JSONArray hands = (JSONArray) obj;
@@ -101,6 +103,10 @@ public class WSClient implements WebSocket.Listener {
             double y = lm[1] * canvas.getHeight();
             gc.fillOval(x, y, 8, 8);
         }
+    }
+
+    public String getLatestLandmarks() {
+        return latestLandmarks;
     }
 
     @Override
