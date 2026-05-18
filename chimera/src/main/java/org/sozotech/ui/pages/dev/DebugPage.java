@@ -220,16 +220,16 @@ public class DebugPage extends PageComponent {
         initSystem();
 
         VBox root = new VBox(5);
-        root.setStyle("-fx-background-color: black; -fx-padding: 20;");
+        root.setStyle("-fx-background-color: #1e1f22; -fx-padding: 20;");
 
         output = new TextArea();
         output.setEditable(false);
         output.setWrapText(true);
         output.setFont(Font.font("Consolas", 15));
         output.setStyle(
-                "-fx-control-inner-background: black;" +
+                "-fx-control-inner-background: #1e1f22;" +
                         "-fx-text-fill: white;" +
-                        "-fx-background-color: black;" +
+                        "-fx-background-color: #1e1f22;" +
                         "-fx-border-color: transparent;"
         );
         VBox.setVgrow(output, Priority.ALWAYS);
