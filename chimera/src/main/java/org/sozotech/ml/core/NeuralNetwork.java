@@ -17,9 +17,7 @@ public class NeuralNetwork {
     }
 
     public static NeuralNetwork getInstance() {
-        if (instance == null) {
-            instance = new NeuralNetwork();
-        }
+        if (instance == null) instance = new NeuralNetwork();
         return instance;
     }
 
@@ -35,7 +33,7 @@ public class NeuralNetwork {
         if (isComplete(landmarks)) return '?';
 
         float[][] normalized = Normalizer.normalize(landmarks);
-        float[]   flat       = Normalizer.flattenLandmarks(normalized);
+        float[] flat = Normalizer.flattenLandmarks(normalized);
 
         if (flat.length != 63) return '?';
 
@@ -44,20 +42,13 @@ public class NeuralNetwork {
 
     public PredictionResult predictWithConfidence(float[][] landmarks) {
         if (isComplete(landmarks)) return new PredictionResult('?', 0f);
-
         float[][] normalized = Normalizer.normalize(landmarks);
-        float[]   flat       = Normalizer.flattenLandmarks(normalized);
-
+        float[] flat = Normalizer.flattenLandmarks(normalized);
         if (flat.length != 63) return new PredictionResult('?', 0f);
-
         float[] output = network.forward(flat);
-
         int best = 0;
-        for (int i = 1; i < output.length; i++) {
-            if (output[i] > output[best]) best = i;
-        }
-
-        char  letter     = (char) ('A' + best);
+        for (int i = 1; i < output.length; i++) if (output[i] > output[best]) best = i;
+        char letter = (char) ('A' + best);
         float confidence = output[best];
 
         return new PredictionResult(letter, confidence);

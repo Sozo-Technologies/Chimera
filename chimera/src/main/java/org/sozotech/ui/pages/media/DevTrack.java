@@ -16,6 +16,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -39,6 +40,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -62,7 +65,7 @@ public class DevTrack extends PageComponent {
     @Override
     protected Parent createView() {
 
-        cameraView    = new ImageView();
+        cameraView = new ImageView();
         overlayCanvas = new Canvas(640, 480);
         StackPane livePane = new StackPane(cameraView, overlayCanvas);
         livePane.setPrefSize(640, 480);
@@ -88,14 +91,12 @@ public class DevTrack extends PageComponent {
         VBox rightBox = new VBox(4, previewLabel, previewPane);
         rightBox.setAlignment(Pos.TOP_CENTER);
 
-        // Divider
         Separator sep = new Separator(javafx.geometry.Orientation.VERTICAL);
 
         HBox panels = new HBox(12, leftBox, sep, rightBox);
         panels.setPadding(new Insets(10));
         panels.setAlignment(Pos.CENTER);
 
-        // Back button overlay
         Button backButton = new Button("← Back");
         backButton.setStyle("""
             -fx-background-color:rgba(0,0,0,0.6);
@@ -110,6 +111,14 @@ public class DevTrack extends PageComponent {
         AnchorPane.setTopAnchor(backButton, 10.0);
         AnchorPane.setLeftAnchor(backButton, 10.0);
 
+        StackPane root = getStackPane(panels, overlay);
+
+        Platform.runLater(root::requestFocus);
+        return root;
+    }
+
+    @NotNull
+    private StackPane getStackPane(HBox panels, AnchorPane overlay) {
         StackPane root = new StackPane(panels, overlay);
         root.setFocusTraversable(true);
         root.setOnKeyPressed(event -> {
@@ -121,11 +130,9 @@ public class DevTrack extends PageComponent {
             if (paused) return;
 
             paused = true;
-            Mat frozen = currentFrame.clone();          // freeze NOW
+            Mat frozen = currentFrame.clone();
             Platform.runLater(() -> showCapturePopup(String.valueOf(ch), frozen));
         });
-
-        Platform.runLater(root::requestFocus);
         return root;
     }
 
@@ -166,8 +173,8 @@ public class DevTrack extends PageComponent {
         popup.setTitle("Capture Dataset");
 
         Label text = new Label("Capture frame for label: \"" + label + "\" ?");
-        Button yes  = new Button("Capture");
-        Button no   = new Button("Cancel");
+        Button yes = new Button("Capture");
+        Button no = new Button("Cancel");
 
         HBox buttons = new HBox(10, yes, no);
         buttons.setAlignment(Pos.CENTER);
@@ -189,8 +196,6 @@ public class DevTrack extends PageComponent {
         popup.setScene(new Scene(root, 320, 140));
         popup.showAndWait();
     }
-
-    // --------------------------------------------------- on-demand capture --
 
     private void captureDataset(String label, Mat frozen) {
         try {
@@ -279,13 +284,13 @@ public class DevTrack extends PageComponent {
         packet[4] = (byte)(h >> 24); packet[5] = (byte)(h >> 16);
         packet[6] = (byte)(h >>  8); packet[7] = (byte)(h);
         packet[8] = (byte)(c >> 24); packet[9] = (byte)(c >> 16);
-        packet[10]= (byte)(c >>  8); packet[11]= (byte)(c);
+        packet[10] = (byte)(c >>  8); packet[11]= (byte)(c);
         System.arraycopy(pixels, 0, packet, 12, pixels.length);
         return packet;
     }
 
     private void saveCSV(String label, float[] flat) throws IOException {
-        File dir = new File("src/main/resources/datasets");
+        File dir = new File("src/main/resources/model/datasets");
         if (!dir.exists()) dir.mkdirs();
 
         File csv = new File(dir, "app_dataset.csv");
@@ -304,39 +309,40 @@ public class DevTrack extends PageComponent {
     }
 
     private void startCamera() {
-        camera = new VideoCapture(0);
-        for (int attempt = 0; attempt < 3; attempt++) {
-            camera.open(0);
-            if (camera.isOpened()) break;
-            try { Thread.sleep(300); } catch (Exception ignored) {}
-            System.out.println("[Camera] Retrying open... attempt " + (attempt + 1));
+        camera = new VideoCapture();
+
+        boolean opened = false;
+
+        for (int attempt = 1; attempt <= 3; attempt++) {
+            if (camera.open(0) && camera.isOpened()) {
+                opened = true;
+                break;
+            }
+
+            System.out.println("[Camera] Retry " + attempt + "/3 failed");
         }
 
-        camera.set(3, 640);
-        camera.set(4, 480);
-
-        if (!camera.isOpened()) {
+        if (!opened) {
             System.out.println("Camera not accessible");
             return;
         }
 
-        new Thread(() -> {
+        camera.set(3, 640);
+        camera.set(4, 480);
+        ScheduledExecutorService cameraExecutor = Executors.newSingleThreadScheduledExecutor();
+        final long frameIntervalMs = 33;
+        cameraExecutor.scheduleAtFixedRate(() -> {
+            if (!running || paused) return;
             Mat frame = new Mat();
-            while (running) {
-                if (paused) {
-                    try { Thread.sleep(50); } catch (Exception ignored) {}
-                    continue;
-                }
-                camera.read(frame);
-                if (!frame.empty()) {
-                    currentFrame = frame.clone();
-                    var img = matToBufferedImage(frame);
-                    WritableImage fx = javafx.embed.swing.SwingFXUtils.toFXImage(img, null);
-                    Platform.runLater(() -> cameraView.setImage(fx));
-                    wsClient.sendFrame(frame);
-                }
-                try { Thread.sleep(10); } catch (Exception ignored) {}
+            camera.read(frame);
+
+            if (!frame.empty()) {
+                currentFrame = frame.clone();
+                var img = matToBufferedImage(frame);
+                WritableImage fx = javafx.embed.swing.SwingFXUtils.toFXImage(img, null);
+                Platform.runLater(() -> cameraView.setImage(fx));
+                wsClient.sendFrame(frame);
             }
-        }).start();
+        }, 0, frameIntervalMs, TimeUnit.MILLISECONDS);
     }
 }

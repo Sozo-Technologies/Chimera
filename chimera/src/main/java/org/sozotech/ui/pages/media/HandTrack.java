@@ -83,6 +83,7 @@ public class HandTrack extends PageComponent {
         return image;
     }
 
+    @SuppressWarnings("BusyWait")
     private void startCamera() {
         camera = new VideoCapture(0);
         camera.set(3, 640);
@@ -109,7 +110,10 @@ public class HandTrack extends PageComponent {
 
                 try {
                     Thread.sleep(10);
-                } catch (Exception ignored) { Terminal.error("[DATASET] Sleep interrupted"); }
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                    Terminal.error("[DATASET] Sleep interrupted");
+                }
             }
         }).start();
     }
