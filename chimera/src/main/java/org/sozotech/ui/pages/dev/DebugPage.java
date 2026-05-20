@@ -1,6 +1,11 @@
 package org.sozotech.ui.pages.dev;
 
-import java.util.*;
+import java.util.Map;
+import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import java.util.LinkedHashMap;
 import java.util.function.Consumer;
 
 import javafx.application.Platform;
@@ -14,18 +19,15 @@ import javafx.scene.text.Font;
 
 import org.sozotech.ml.core.NeuralNetwork;
 import org.sozotech.utils.core.AppContext;
-import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.page.PageComponent;
 
 public class DebugPage extends PageComponent {
 
-    static { OpenCVContext.load(); }
+    static { AppContext.loadOpenCV(); }
 
     private TextArea output;
     private TextArea suggestionArea;
     private TextField input;
-
-    private String recent_page;
 
     private final List<String> commandHistory = new ArrayList<>();
     private int historyIndex = -1;
@@ -39,6 +41,8 @@ public class DebugPage extends PageComponent {
 
     private volatile boolean estimateRunning = false;
     private Thread estimateThread  = null;
+
+    private String recent_page;
 
     private static class ParsedCommand {
         String root;

@@ -2,7 +2,12 @@ package org.sozotech.stager;
 
 import java.io.*;
 import java.net.URI;
-import java.nio.file.*;
+
+import java.nio.file.Paths;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.Files;
+
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -160,11 +165,33 @@ public class Stager {
     }
 
     public static void stopMediapipe() {
-
         if (mediapipeProcess != null) {
             mediapipeProcess.destroy();
             System.out.println("[Stager] MediaPipe server stopped.");
         }
 
+    }
+
+    public static void cleanup() {
+        if (mediapipeProcess != null && mediapipeProcess.isAlive()) {
+            mediapipeProcess.destroy();
+            System.out.println("[Stager] MediaPipe process terminated.");
+            mediapipeProcess = null;
+        }
+
+        Path dir = Paths.get(".chimera");
+
+        if (!Files.exists(dir)) {
+            System.out.println("[Stager] .chimera directory not found, nothing to clean.");
+            return;
+        }
+
+        try (var stream = Files.walk(dir)) {
+            stream.sorted(java.util.Comparator.reverseOrder()).map(Path::toFile).forEach(file -> {
+                if (file.delete()) System.out.println("[Stager] Deleted: " + file.getPath());
+                else System.out.println("[Stager] Failed to delete: " + file.getPath());
+            });
+
+        } catch (IOException e) { System.out.println("[Stager] Cleanup failed: " + e.getMessage()); }
     }
 }

@@ -10,20 +10,35 @@ import javafx.util.Duration;
 
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
 import org.sozotech.utils.style.Transition;
 import org.sozotech.utils.page.Page;
 
 import java.util.Map;
 
 public class Renderer {
+
     private final Stage stage;
+
     private Page currentPage;
+
     private boolean isTransitioning = false;
+
     public boolean lock = false;
 
     public Renderer(Stage stage) {
         this.stage = stage;
         this.stage.setFullScreen(true);
+        this.stage.setOnCloseRequest(event -> unmount());
+    }
+
+    public void unmount() {
+        try {
+            if (currentPage != null) {
+                currentPage.onUnmount();
+                currentPage = null;
+            }
+        } catch (Exception _) {}
     }
 
     public void render(Page page, Transition transition, String hexColor, String path) {
@@ -44,9 +59,7 @@ public class Renderer {
                 scene = new Scene(container);
                 stage.setScene(scene);
                 attachGlobalShortcuts(scene, path);
-            } else {
-                scene.setRoot(container);
-            }
+            } else scene.setRoot(container);
 
             currentPage = page;
             page.onMount();
@@ -85,7 +98,6 @@ public class Renderer {
 
             case SLIDE_LEFT, SLIDE_RIGHT -> {
                 double width = stage.getWidth();
-
                 double start = transition == Transition.SLIDE_LEFT ? width : -width;
                 double endOld = transition == Transition.SLIDE_LEFT ? -width : width;
 
@@ -122,7 +134,7 @@ public class Renderer {
 
     private void attachGlobalShortcuts(Scene scene, String path) {
         scene.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
-            if(lock) return;
+            if (lock) return;
             if (e.isControlDown() && e.getCode() == KeyCode.D) {
                 System.out.println("Opening Debug Page...");
                 e.consume();

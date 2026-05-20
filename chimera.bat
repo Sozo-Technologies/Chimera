@@ -482,7 +482,6 @@ if not defined _MH (
     for %%D in ("%PATH:;=" "%") do (
         if not defined _MH (
             if exist "%%~D\mvn.cmd" (
-                :: Parent of \bin is the Maven home
                 for %%P in ("%%~D\..") do set "_MH=%%~fP"
             )
         )

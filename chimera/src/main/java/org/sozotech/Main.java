@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
 import org.sozotech.ml.core.NeuralNetwork;
-import org.sozotech.utils.core.OpenCVContext;
 import org.sozotech.utils.core.Renderer;
 import org.sozotech.utils.core.Router;
 import org.sozotech.utils.core.AppContext;
@@ -17,13 +16,15 @@ import org.sozotech.ui.PageRegistry;
 import org.sozotech.stager.Stager;
 
 public class Main extends Application {
-    static { OpenCVContext.load(); }
+    static { AppContext.loadOpenCV(); }
+
+    private Renderer renderer;
 
     @Override
     public void start(Stage stage) {
         stage.setTitle("Chimera.");
         stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/logo.png"))));
-        Renderer renderer = new Renderer(stage);
+        renderer = new Renderer(stage);
         AppContext.router = new Router(renderer);
         PageRegistry.loadRegisteredPages();
 
@@ -41,5 +42,7 @@ public class Main extends Application {
 
     private void onClose() {
         NeuralNetwork.getInstance().shutdown();
+        if(renderer != null) renderer.unmount();
+        Stager.cleanup();
     }
 }
