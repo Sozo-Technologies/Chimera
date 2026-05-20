@@ -55,6 +55,6 @@ public class IntroPage extends PageComponent {
     }
 
     private void onVideoEnd() {
-        AppContext.router.navigate("/home", Transition.FADE, "#00000");
+        AppContext.router.navigate("/home", Transition.FADE, "#ffffff");
     }
 }
