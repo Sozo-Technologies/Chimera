@@ -16,6 +16,11 @@ public class HomeXML extends PageComponentFXML {
     }
 
     @Override
+    protected void onRender() {
+
+    }
+
+    @Override
     public void onMount() {
         System.out.println("Home Page Mounted!");
     }

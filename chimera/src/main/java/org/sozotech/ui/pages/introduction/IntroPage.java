@@ -44,12 +44,14 @@ public class IntroPage extends PageComponent {
 
     @Override
     public void onMount() {
+        super.onMount();
         mediaPlayer.play();
         mediaPlayer.setOnEndOfMedia(this::onVideoEnd);
     }
 
     @Override
     public void onUnmount() {
+        super.onUnmount();
         mediaPlayer.stop();
         mediaPlayer.dispose();
     }

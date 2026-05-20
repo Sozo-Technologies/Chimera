@@ -61,6 +61,7 @@ public class HandTrack extends PageComponent {
 
     @Override
     public void onMount() {
+        super.onMount();
         running = true;
         wsClient = new WSClient(canvas);
         startCamera();
@@ -68,6 +69,7 @@ public class HandTrack extends PageComponent {
 
     @Override
     public void onUnmount() {
+        super.onUnmount();
         running = false;
         if (camera != null) camera.release();
         if (wsClient != null) wsClient.close();

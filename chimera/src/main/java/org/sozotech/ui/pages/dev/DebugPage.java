@@ -389,7 +389,7 @@ public class DebugPage extends PageComponent {
                 .option("view", opt -> opt
                         .arg("--dataset")
                         .arg("--statistics")
-                        .arg("--estimate"));          // ← add this
+                        .arg("--estimate"));
 
         registry.register("estimate")
                 .option("start")
@@ -402,14 +402,16 @@ public class DebugPage extends PageComponent {
 
     @Override
     public void onMount() {
+        super.onMount();
         AppContext.router.getRenderer().lock = true;
         printBanner();
     }
 
     @Override
     public void onUnmount() {
+        super.onUnmount();
         AppContext.router.getRenderer().lock = false;
-        stopEstimateLoop();  // ← add this
+        stopEstimateLoop();
     }
 
     private void print(String text) {

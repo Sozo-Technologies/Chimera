@@ -1,16 +1,14 @@
 package org.sozotech.utils.page;
+
 import javafx.scene.Parent;
 
-public abstract class PageComponent implements Page {
-    protected Parent root;
+public abstract class PageComponent extends BasePage {
 
-    public PageComponent() {
-        this.root = createView();
+    @Override
+    protected void performRender() {
+        slot.getChildren().setAll(createView());
+        tickHooks();
     }
 
     protected abstract Parent createView();
-
-    public Parent getView() {
-        return root;
-    }
 }

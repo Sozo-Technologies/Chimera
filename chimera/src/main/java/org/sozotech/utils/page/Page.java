@@ -1,6 +1,6 @@
 package org.sozotech.utils.page;
-import javafx.scene.Parent;
 
+import javafx.scene.Parent;
 import java.util.Map;
 
 public interface Page {

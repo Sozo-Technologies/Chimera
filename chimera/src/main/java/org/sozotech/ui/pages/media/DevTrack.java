@@ -143,6 +143,7 @@ public class DevTrack extends PageComponent {
 
     @Override
     public void onMount() {
+        super.onMount();
         AppContext.router.getRenderer().lock = true;
         running = true;
 
@@ -164,6 +165,7 @@ public class DevTrack extends PageComponent {
 
     @Override
     public void onUnmount() {
+        super.onUnmount();
         running = false;
         if (camera   != null) camera.release();
         if (wsClient != null) wsClient.close();
