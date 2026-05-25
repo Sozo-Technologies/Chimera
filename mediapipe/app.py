@@ -13,25 +13,12 @@ REQUIRED_LIBRARIES = {
 
 
 def ensure_package(module_name, package_name):
-
     try:
-
         importlib.import_module(module_name)
-
         print(f"[PS]: {package_name} already installed")
-
     except ImportError:
-
         print(f"[PS]: Installing {package_name}...")
-
-        subprocess.check_call([
-            sys.executable,
-            "-m",
-            "pip",
-            "install",
-            package_name
-        ])
-
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
         print(f"[PS]: Installed {package_name}")
 
 
@@ -53,14 +40,11 @@ HandLandmarker = vision.HandLandmarker
 HandLandmarkerOptions = vision.HandLandmarkerOptions
 VisionRunningMode = vision.RunningMode
 
-
 MODEL_PATH = Path(sys.argv[1]).resolve()
 print(f"MODEL PATH: {MODEL_PATH}", flush=True)
 
 options = HandLandmarkerOptions(
-    base_options=BaseOptions(
-        model_asset_path=str(MODEL_PATH)
-    ),
+    base_options=BaseOptions(model_asset_path=str(MODEL_PATH)),
     num_hands=2,
     running_mode=VisionRunningMode.VIDEO
 )
@@ -71,7 +55,6 @@ frame_id = 0
 
 
 def validate_frame(message):
-
     if not isinstance(message, (bytes, bytearray)):
         return None
 
@@ -79,76 +62,73 @@ def validate_frame(message):
         print("[PS]: Invalid packet size")
         return None
 
-    width = int.from_bytes(message[0:4], "big")
-    height = int.from_bytes(message[4:8], "big")
+    width    = int.from_bytes(message[0:4],  "big")
+    height   = int.from_bytes(message[4:8],  "big")
     channels = int.from_bytes(message[8:12], "big")
-
     image_bytes = message[12:]
 
     expected_size = width * height * channels
-    actual_size = len(image_bytes)
 
-    if actual_size != expected_size:
-
-        print(
-            f"[PS]: Frame mismatch "
-            f"(expected={expected_size}, got={actual_size})"
-        )
-
+    if len(image_bytes) != expected_size:
+        print(f"[PS]: Frame mismatch (expected={expected_size}, got={len(image_bytes)})")
         return None
 
     return width, height, channels, image_bytes
 
 
-def extract_landmarks(frame):
-
+def extract_left_hand(frame):
     global frame_id
 
     rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-
-    mp_image = mp.Image(
-        image_format=mp.ImageFormat.SRGB,
-        data=rgb
-    )
+    mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
 
     frame_id += 1
+    result = detector.detect_for_video(mp_image, frame_id * 33)
 
-    result = detector.detect_for_video(
-        mp_image,
-        frame_id * 33
-    )
+    if not result.hand_landmarks:
+        return None
 
-    hands = []
+    TARGET_LABEL = "Left"
 
-    if result.hand_landmarks:
+    for i, handedness_list in enumerate(result.handedness):
+        if handedness_list[0].category_name != TARGET_LABEL:
+            continue
 
-        for hand in result.hand_landmarks:
+        img_landmarks   = result.hand_landmarks[i]
+        world_landmarks = result.hand_world_landmarks[i]
 
-            hand_data = []
+        landmarks   = []
+        world       = []
+        visibility  = []
 
-            for lm in hand:
+        for lm, wlm in zip(img_landmarks, world_landmarks):
+            landmarks.append({
+                "x": round(lm.x, 6),
+                "y": round(lm.y, 6),
+                "z": round(lm.z, 6)
+            })
+            world.append({
+                "x": round(wlm.x, 6),
+                "y": round(wlm.y, 6),
+                "z": round(wlm.z, 6)
+            })
+            visibility.append(round(lm.presence, 4))
 
-                hand_data.append({
-                    "x": round(lm.x, 6),
-                    "y": round(lm.y, 6),
-                    "z": round(lm.z, 6)
-                })
+        return {
+            "landmarks":  landmarks,
+            "world":      world,
+            "visibility": visibility
+        }
 
-            hands.append(hand_data)
-
-    return hands
+    return None
 
 
 async def handler(websocket):
-
     print("[PS]: Client Connected")
 
     while True:
-
         try:
-
             message = await websocket.recv()
-
             validated = validate_frame(message)
 
             if validated is None:
@@ -156,54 +136,42 @@ async def handler(websocket):
 
             width, height, channels, image_bytes = validated
 
-            frame = np.frombuffer(
-                image_bytes,
-                dtype=np.uint8
-            ).reshape((height, width, channels))
+            frame = np.frombuffer(image_bytes, dtype=np.uint8).reshape((height, width, channels))
+            hand = extract_left_hand(frame)
 
-            hands = extract_landmarks(frame)
+            if hand is None:
+                await websocket.send("{}")
+                continue
 
-            payload = json.dumps(
-                hands,
-                separators=(",", ":")
-            )
-
-            await websocket.send(payload)
+            await websocket.send(json.dumps(hand, separators=(",", ":")))
 
         except websockets.ConnectionClosed:
-
             print("[PS]: Client Disconnected")
             break
 
         except Exception as e:
-
             print(f"[PS]: ERROR: {e}")
             break
 
-async def main():
 
-    print("[PS]: Starting MediaPipe Server...")
+async def main():
+    print("[PS]: Starting MediaPipe Server (Left Hand Only)...")
 
     async with websockets.serve(
-            handler,
-            "localhost",
-            8765,
-            max_size=None,
-            ping_interval=None
+        handler,
+        "localhost",
+        8765,
+        max_size=None,
+        ping_interval=None
     ):
-
         print("[PS]: MediaPipe Server Running")
         print("[PS]: ws://localhost:8765")
         print("READY", flush=True)
-
         await asyncio.Future()
 
+
 if __name__ == "__main__":
-
     try:
-
         asyncio.run(main())
-
     except KeyboardInterrupt:
-
         print("\n[PS]: Server Stopped")

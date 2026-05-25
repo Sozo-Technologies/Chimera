@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import org.opencv.core.Mat;
 import org.opencv.videoio.VideoCapture;
 
+import org.sozotech.ml.translation.TranslationUnit;
 import org.sozotech.stager.Stager;
 import org.sozotech.system.WSClient;
 import org.sozotech.utils.core.Terminal;
@@ -31,6 +32,9 @@ public class HandTrack extends PageComponent {
     private WSClient wsClient;
 
     private volatile boolean running = false;
+
+    private final TranslationUnit translator = new TranslationUnit(20);
+
 
     @Override
     protected Parent createView() {
@@ -63,7 +67,8 @@ public class HandTrack extends PageComponent {
     public void onMount() {
         super.onMount();
         running = true;
-        wsClient = new WSClient(canvas);
+        translator.setDebugMode(true);
+        wsClient = new WSClient(canvas, translator);
         startCamera();
     }
 
@@ -71,6 +76,7 @@ public class HandTrack extends PageComponent {
     public void onUnmount() {
         super.onUnmount();
         running = false;
+        translator.reset();
         if (camera != null) camera.release();
         if (wsClient != null) wsClient.close();
         Stager.stopMediapipe();

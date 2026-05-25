@@ -2,8 +2,38 @@ package org.sozotech.ml.preprocess;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
 public class Matrix {
+
+    public static HandData parse(String json) {
+        if (json == null || json.isBlank() || json.equals("{}")) return HandData.empty();
+
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(json);
+
+            JSONArray lmArr  = (JSONArray) root.get("landmarks");
+            JSONArray wlArr  = (JSONArray) root.get("world");
+            JSONArray visArr = (JSONArray) root.get("visibility");
+
+            if (lmArr == null || wlArr == null || visArr == null) return HandData.empty();
+
+            float[][] landmarks  = extractMatrix(lmArr);
+            float[][] world      = extractMatrix(wlArr);
+            float[] visibility   = extractVisibility(visArr);
+
+            return new HandData(landmarks, world, visibility);
+
+        } catch (Exception e) {
+            return HandData.empty();
+        }
+    }
+
+    public static float[][] convert(String json) {
+        return parse(json).landmarks();
+    }
+
     public static float[][] convert(JSONArray landmarks) {
         float[][] buffer = new float[21][3];
 
@@ -14,6 +44,7 @@ public class Matrix {
         }
 
         if (landmarks == null || landmarks.isEmpty()) return buffer;
+
         int size = Math.min(landmarks.size(), 21);
 
         for (int i = 0; i < size; i++) {
@@ -32,8 +63,7 @@ public class Matrix {
         return buffer;
     }
 
-    public static float[][] convert(String data) {
-
+    private static float[][] extractMatrix(JSONArray arr) {
         float[][] buffer = new float[21][3];
 
         for (int i = 0; i < 21; i++) {
@@ -42,52 +72,31 @@ public class Matrix {
             buffer[i][2] = -1f;
         }
 
-        if (data == null || data.length() < 10) {
-            return buffer;
+        int size = Math.min(arr.size(), 21);
+
+        for (int i = 0; i < size; i++) {
+            Object obj = arr.get(i);
+            if (!(obj instanceof JSONObject point)) continue;
+
+            Object xObj = point.get("x");
+            Object yObj = point.get("y");
+            Object zObj = point.get("z");
+
+            if (xObj instanceof Number) buffer[i][0] = ((Number) xObj).floatValue();
+            if (yObj instanceof Number) buffer[i][1] = ((Number) yObj).floatValue();
+            if (zObj instanceof Number) buffer[i][2] = ((Number) zObj).floatValue();
         }
 
-        int index = -1;
-        int len = data.length();
+        return buffer;
+    }
 
-        float x = -1f, y = -1f, z = -1f;
+    private static float[] extractVisibility(JSONArray arr) {
+        float[] buffer = new float[21];
+        int size = Math.min(arr.size(), 21);
 
-        StringBuilder num = new StringBuilder(16);
-        char key = 0;
-
-        for (int i = 0; i < len; i++) {
-
-            char c = data.charAt(i);
-
-            if (c == '{') {
-                index++;
-                x = y = z = -1f;
-            }
-
-            if (c == 'x') key = 1;
-            else if (c == 'y') key = 2;
-            else if (c == 'z') key = 3;
-
-            if ((c >= '0' && c <= '9') || c == '.' || c == '-') {
-                num.append(c);
-            }
-
-            if ((c == ',' || c == '}' ) && !num.isEmpty()) {
-
-                float value = Float.parseFloat(num.toString());
-                num.setLength(0);
-
-                if (key == 1) x = value;
-                else if (key == 2) y = value;
-                else if (key == 3) z = value;
-
-                key = 0;
-            }
-
-            if (c == '}' && index >= 0 && index < 21) {
-                buffer[index][0] = x;
-                buffer[index][1] = y;
-                buffer[index][2] = z;
-            }
+        for (int i = 0; i < size; i++) {
+            Object v = arr.get(i);
+            if (v instanceof Number) buffer[i] = ((Number) v).floatValue();
         }
 
         return buffer;

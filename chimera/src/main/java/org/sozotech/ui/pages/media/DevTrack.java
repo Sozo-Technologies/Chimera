@@ -157,7 +157,7 @@ public class DevTrack extends PageComponent {
 
             try { Thread.sleep(500); } catch (Exception ignored) {}
 
-            wsClient = new WSClient(overlayCanvas);
+            wsClient = new WSClient(overlayCanvas, null);
             startCamera();
 
         }).start();

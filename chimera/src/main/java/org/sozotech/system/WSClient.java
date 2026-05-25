@@ -11,6 +11,10 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import org.sozotech.ml.preprocess.HandData;
+import org.sozotech.ml.preprocess.Matrix;
+import org.sozotech.ml.translation.TranslationUnit;
+
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.WebSocket;
@@ -22,17 +26,20 @@ import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
 public class WSClient implements WebSocket.Listener {
+
     private WebSocket socket;
     private final Canvas canvas;
+    private final TranslationUnit translator;
 
-    private volatile String latestLandmarks;
+    private volatile String latestJson;
     private volatile Consumer<String> oneShotCallback = null;
     private final Object callbackLock = new Object();
 
     private final CountDownLatch readyLatch = new CountDownLatch(1);
 
-    public WSClient(Canvas canvas) {
+    public WSClient(Canvas canvas, TranslationUnit translator) {
         this.canvas = canvas;
+        this.translator = translator;
         HttpClient.newHttpClient()
                 .newWebSocketBuilder()
                 .buildAsync(URI.create("ws://localhost:8765"), this)
@@ -59,12 +66,10 @@ public class WSClient implements WebSocket.Listener {
 
     public void sendFrame(Mat frame) {
         if (awaitReady()) return;
-
         int w = frame.width(), h = frame.height(), c = frame.channels();
-        byte[] data   = new byte[w * h * c];
+        byte[] data = new byte[w * h * c];
         frame.get(0, 0, data);
-        byte[] packet = buildPacket(w, h, c, data);
-        socket.sendBinary(ByteBuffer.wrap(packet), true);
+        socket.sendBinary(ByteBuffer.wrap(buildPacket(w, h, c, data)), true);
     }
 
     public void sendOnce(byte[] packet, Consumer<String> callback) {
@@ -85,7 +90,7 @@ public class WSClient implements WebSocket.Listener {
             String json = data.toString();
             if (json.isBlank()) { ws.request(1); return null; }
 
-            latestLandmarks = json;
+            latestJson = json;
 
             Consumer<String> cb;
             synchronized (callbackLock) {
@@ -95,42 +100,65 @@ public class WSClient implements WebSocket.Listener {
 
             if (cb != null) {
                 cb.accept(json);
+                ws.request(1);
+                return null;
+            }
+
+            HandData hand = Matrix.parse(json);
+            translator.feedFrame(hand);
+
+            if (hand.isPresent()) {
+                JSONArray lmArray = extractLandmarkArray(json);
+                if (lmArray != null) Platform.runLater(() -> renderHands(lmArray));
             } else {
-                JSONParser parser = new JSONParser();
-                JSONArray hands = (JSONArray) parser.parse(json);
-                Platform.runLater(() -> renderHands(hands));
+                Platform.runLater(() -> clearCanvas());
             }
 
         } catch (Exception ignored) {}
+
         ws.request(1);
         return null;
     }
 
-    private void renderHands(JSONArray hands) {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        gc.setFill(Color.RED);
-        for (Object hObj : hands) {
-            JSONArray hand = (JSONArray) hObj;
-            for (Object lmObj : hand) {
-                JSONObject lm = (JSONObject) lmObj;
-                double x = ((Number) lm.get("x")).doubleValue() * canvas.getWidth();
-                double y = ((Number) lm.get("y")).doubleValue() * canvas.getHeight();
-                gc.fillOval(x, y, 8, 8);
-            }
+    private JSONArray extractLandmarkArray(String json) {
+        try {
+            JSONParser parser = new JSONParser();
+            JSONObject root = (JSONObject) parser.parse(json);
+            return (JSONArray) root.get("landmarks");
+        } catch (Exception e) {
+            return null;
         }
     }
 
-    public String getLatestLandmarks() { return latestLandmarks; }
+    private void clearCanvas() {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    private void renderHands(JSONArray landmarks) {
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+        gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gc.setFill(Color.RED);
+        for (Object lmObj : landmarks) {
+            JSONObject lm = (JSONObject) lmObj;
+            double x = ((Number) lm.get("x")).doubleValue() * canvas.getWidth();
+            double y = ((Number) lm.get("y")).doubleValue() * canvas.getHeight();
+            gc.fillOval(x, y, 8, 8);
+        }
+    }
+
+    public String getLatestJson() {
+        return latestJson;
+    }
 
     private static byte[] buildPacket(int w, int h, int c, byte[] pixels) {
         byte[] packet = new byte[12 + pixels.length];
-        packet[0] = (byte)(w >> 24); packet[1] = (byte)(w >> 16);
-        packet[2] = (byte)(w >>  8); packet[3] = (byte)(w);
-        packet[4] = (byte)(h >> 24); packet[5] = (byte)(h >> 16);
-        packet[6] = (byte)(h >>  8); packet[7] = (byte)(h);
-        packet[8] = (byte)(c >> 24); packet[9] = (byte)(c >> 16);
-        packet[10]= (byte)(c >>  8); packet[11]= (byte)(c);
+        packet[0]  = (byte)(w >> 24); packet[1]  = (byte)(w >> 16);
+        packet[2]  = (byte)(w >>  8); packet[3]  = (byte) w;
+        packet[4]  = (byte)(h >> 24); packet[5]  = (byte)(h >> 16);
+        packet[6]  = (byte)(h >>  8); packet[7]  = (byte) h;
+        packet[8]  = (byte)(c >> 24); packet[9]  = (byte)(c >> 16);
+        packet[10] = (byte)(c >>  8); packet[11] = (byte) c;
         System.arraycopy(pixels, 0, packet, 12, pixels.length);
         return packet;
     }

@@ -2,7 +2,7 @@ from pathlib import Path
 
 def python_to_java_hex_byte_array(
         input_file,
-        output_file="Output.java",
+        output_file="Output",
         variable_name="PYTHON_BYTES"
 ):
 
@@ -28,7 +28,9 @@ def python_to_java_hex_byte_array(
 
     joined_lines = ",\n".join(lines)
 
-    java_code = f"""public class PythonBytes {{
+    java_code = f"""package org.sozotech.stager;
+
+    public class {output_file} {{
 
     public static final byte[] {variable_name} = {{
 {joined_lines}
@@ -37,18 +39,18 @@ def python_to_java_hex_byte_array(
 }}
 """
 
-    Path(output_file).write_text(
+    Path(f"{output_file}.java").write_text(
         java_code,
         encoding="utf-8"
     )
 
-    print(f"[+]: Generated -> {output_file}")
+    print(f"[+]: Generated -> {output_file}.java")
     print(f"[+]: Total Bytes -> {len(data)}")
 
 
 if __name__ == "__main__":
     python_to_java_hex_byte_array(
-        "app.py",
-        "MediaPipeServer.java",
+        "./mediapipe/app.py",
+        "MediapipeServer",
         "SERVER_SCRIPT"
     )
