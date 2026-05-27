@@ -1,142 +1,165 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.Group?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
-<?import javafx.scene.effect.GaussianBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="840.0" prefWidth="1440.0" style="-fx-background-color: #060606;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/26">
-
-    <!-- Background Right -->
-    <Rectangle fill="#6103A0" height="420" layoutX="1080" layoutY="0" width="360" />
-
-    <!-- Background Left -->
-    <Rectangle fill="#2F94D8" height="420" layoutX="0" layoutY="420" width="360" />
-
-    <!-- Overlay Blur -->
-    <Rectangle fill="#7220AB" height="840" opacity="0.2" width="1440">
-        <effect>
-            <GaussianBlur radius="80" />
-        </effect>
-    </Rectangle>
-
-    <!-- Decorative Circles -->
-    <Group layoutX="708" layoutY="-411">
-
-        <Circle centerX="554" centerY="554" fill="transparent" opacity="0.5" radius="490" stroke="#D9D6D6" strokeWidth="5" />
-
-        <Circle centerX="554" centerY="554" fill="transparent" opacity="0.5" radius="390" stroke="#D9D6D6" strokeWidth="5" />
-
-    </Group>
-
-    <!-- Hero Title -->
-    <Text fill="WHITE" layoutX="100" layoutY="370" strokeType="OUTSIDE" strokeWidth="0" wrappingWidth="520">
-
-        <font>
-            <Font name="Poppins Bold" size="64" />
-        </font>
-
-        <text>
-            Gesture to Text
-            Translation
-        </text>
-
-        <fill>
-            <LinearGradient cycleMethod="NO_CYCLE" endX="1" endY="1" proportional="true" startX="0" startY="0">
-
-                <stops>
-                    <Stop color="#E7D9F1" offset="0" />
-                    <Stop color="#2F94D8" offset="0.5" />
-                    <Stop color="#C0C0C6" offset="1" />
-                </stops>
-
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.018400000408291817" green="0.018400000408291817" blue="0.23000000417232513" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3803921639919281" green="0.0117647061124444" blue="0.6274510025978088" />
+                     </color>
+                  </Stop>
+               </stops>
             </LinearGradient>
-        </fill>
-
-        <effect>
-            <DropShadow color="#000000" offsetY="8" radius="4" />
-        </effect>
-
-    </Text>
-
-    <!-- Subtitle -->
-    <Text fill="WHITE" layoutX="103" layoutY="280" text="Real-Time">
-
-        <font>
-            <Font name="Poppins Medium" size="36" />
-        </font>
-
-        <effect>
-            <DropShadow color="#000000" offsetY="8" radius="4" />
-        </effect>
-
-    </Text>
-
-    <!-- Description -->
-    <Text fill="WHITE" layoutX="108" layoutY="470" lineSpacing="8" text="Bridging sign language and digital communication using AI-powered gesture recognition." wrappingWidth="371">
-
-        <font>
-            <Font name="Poppins Regular" size="20" />
-        </font>
-
-        <effect>
-            <DropShadow color="#000000" offsetY="8" radius="4" />
-        </effect>
-
-    </Text>
-
-    <!-- CTA Button -->
-    <StackPane layoutX="109" layoutY="545" prefHeight="50" prefWidth="170" style="             -fx-background-radius: 12;             -fx-border-radius: 12;             -fx-border-color: #2F94D8;             -fx-background-color:                 linear-gradient(to right, #4FA5DF, #2F94D8);         ">
-
-        <effect>
-            <DropShadow color="#000000" offsetY="8" radius="10" />
-        </effect>
-
-        <HBox alignment="CENTER" spacing="8">
-
-            <Label style="                     -fx-font-family: 'Poppins Medium';                     -fx-font-size: 16px;                 " text="Start Translating" textFill="WHITE" />
-
-            <Label style="-fx-font-size: 16px;" text="→" textFill="WHITE" />
-
-        </HBox>
-
-    </StackPane>
-
-    <!-- Header -->
-    <HBox alignment="CENTER_LEFT" layoutX="80" layoutY="32" spacing="562">
-
-        <!-- Logo -->
-        <Label style="                 -fx-font-family: 'Poppins Bold';                 -fx-font-size: 32px;             " text="HIMERA." textFill="WHITE" />
-
-        <!-- Navigation -->
-        <HBox alignment="CENTER" spacing="50">
-
-            <!-- Home -->
-            <StackPane prefHeight="35" prefWidth="120" style="                     -fx-border-color: #E7D9F1;                     -fx-border-radius: 60;                     -fx-background-radius: 60;                 ">
-
-                <Label style="                         -fx-font-family: 'Poppins Medium';                         -fx-font-size: 16px;                     " text="Home" textFill="WHITE" />
-
-            </StackPane>
-
-            <Label style="                     -fx-font-family: 'Poppins Medium';                     -fx-font-size: 16px;                 " text="Tools" textFill="rgba(255,255,255,0.5)" />
-
-            <Label style="                     -fx-font-family: 'Poppins Medium';                     -fx-font-size: 16px;                 " text="About" textFill="rgba(255,255,255,0.5)" />
-
-            <Label style="                     -fx-font-family: 'Poppins Medium';                     -fx-font-size: 16px;                 " text="Settings" textFill="rgba(255,255,255,0.5)" />
-
-        </HBox>
-
-    </HBox>
-   <Button layoutX="316.0" layoutY="131.0" mnemonicParsing="false" text="Button" />
-
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="840.0" fitWidth="1485.0" layoutX="-11.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Background%20image.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="TOP_LEFT" layoutX="187.0" layoutY="214.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="230.0" style="-fx-font-family: Poppins Medium;" text="Real-Time" textFill="WHITE">
+         <font>
+            <Font name="Poppins Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="179.0" layoutY="250.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Gesture to Text" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Poppins Bold" size="72.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" startY="0.9905362535350329">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.11185682326621925">
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5077208490205707">
+                     <color>
+                        <Color red="0.18479999899864197" green="0.5779200196266174" blue="0.8399999737739563" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7529411911964417" green="0.7529411911964417" blue="0.7764706015586853" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="431.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="331.0" text="Bridging sign language and digital" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="184.0" layoutY="338.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Translation" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Poppins Bold" size="72.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" startY="0.9905362535350329">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.11185682326621925">
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5077208490205707">
+                     <color>
+                        <Color red="0.18479999899864197" green="0.5779200196266174" blue="0.8399999737739563" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7529411911964417" green="0.7529411911964417" blue="0.7764706015586853" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="461.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="communication using AI-powered gesture" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="491.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="recognition." textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <VBox layoutX="825.0" layoutY="169.0" prefHeight="150.0" prefWidth="441.0">
+         <children>
+            <Rectangle arcHeight="12.0" arcWidth="12.0" height="150.0" layoutX="825.0" layoutY="169.0" opacity="0.36" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" width="441.0">
+               <fill>
+                  <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+                     <stops>
+                        <Stop>
+                           <color>
+                              <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.47865171604736184">
+                           <color>
+                              <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5658591149669887">
+                           <color>
+                              <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                           </color>
+                        </Stop>
+                        <Stop offset="0.5995934959349594">
+                           <color>
+                              <Color red="0.1178399994969368" green="0.07919999957084656" blue="0.18000000715255737" />
+                           </color>
+                        </Stop>
+                        <Stop offset="1.0">
+                           <color>
+                              <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                           </color>
+                        </Stop>
+                     </stops>
+                  </LinearGradient>
+               </fill>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Rectangle>
+            <Label text="Label" />
+         </children>
+      </VBox>
+   </children>
 </AnchorPane>
