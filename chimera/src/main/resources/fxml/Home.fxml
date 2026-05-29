@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
 <?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1462.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0" />
-      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1440.0">
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0">
          <fill>
             <LinearGradient endX="1.0" endY="1.0">
                <stops>
@@ -33,53 +36,40 @@
             </LinearGradient>
          </fill>
       </Rectangle>
-      <ImageView fitHeight="840.0" fitWidth="1485.0" layoutX="-11.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../assets/Background%20image.jpg" />
          </image>
       </ImageView>
-      <Label alignment="TOP_LEFT" layoutX="187.0" layoutY="214.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="230.0" style="-fx-font-family: Poppins Medium;" text="Real-Time" textFill="WHITE">
+      <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/logo-in-page.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#19192600" height="35.0" layoutX="864.0" layoutY="50.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="110.0" />
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#19192600" height="35.0" layoutX="1062.0" layoutY="50.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="110.0" />
+      <Rectangle arcHeight="30.0" arcWidth="30.0" fill="#19192600" height="35.0" layoutX="1266.0" layoutY="50.0" stroke="WHITE" strokeType="INSIDE" strokeWidth="3.0" width="110.0" />
+      <Label alignment="CENTER" layoutX="893.0" layoutY="52.0" text="Home" textFill="WHITE">
          <font>
-            <Font name="Poppins Bold" size="36.0" />
+            <Font name="Segoe UI Semibold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="179.0" layoutY="250.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Gesture to Text" textAlignment="JUSTIFY">
+      <Label layoutX="1093.0" layoutY="52.0" text="Tools" textFill="WHITE">
          <font>
-            <Font name="Poppins Bold" size="72.0" />
-         </font>
-         <textFill>
-            <LinearGradient endX="1.0" startY="0.9905362535350329">
-               <stops>
-                  <Stop>
-                     <color>
-                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.11185682326621925">
-                     <color>
-                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
-                     </color>
-                  </Stop>
-                  <Stop offset="0.5077208490205707">
-                     <color>
-                        <Color red="0.18479999899864197" green="0.5779200196266174" blue="0.8399999737739563" />
-                     </color>
-                  </Stop>
-                  <Stop offset="1.0">
-                     <color>
-                        <Color red="0.7529411911964417" green="0.7529411911964417" blue="0.7764706015586853" />
-                     </color>
-                  </Stop>
-               </stops>
-            </LinearGradient>
-         </textFill>
-      </Label>
-      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="431.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="331.0" text="Bridging sign language and digital" textAlignment="JUSTIFY" textFill="WHITE">
-         <font>
-            <Font size="20.0" />
+            <Font name="Segoe UI Semibold" size="20.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="184.0" layoutY="338.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Translation" textAlignment="JUSTIFY">
+      <Label layoutX="1293.0" layoutY="52.0" text="About" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Semibold" size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="62.0" prefWidth="230.0" style="-fx-font-family: Poppins Medium;" text="Real-Time" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="36.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="260.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Gesture to Text" textAlignment="JUSTIFY">
          <font>
             <Font name="Poppins Bold" size="72.0" />
          </font>
@@ -110,56 +100,251 @@
             </LinearGradient>
          </textFill>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="461.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="communication using AI-powered gesture" textAlignment="JUSTIFY" textFill="WHITE">
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="348.0" lineSpacing="80.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="165.0" prefWidth="828.0" style="-fx-font-family: Poppins Medium;" text="Translation" textAlignment="JUSTIFY">
+         <font>
+            <Font name="Poppins Bold" size="72.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" startY="0.9905362535350329">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.11185682326621925">
+                     <color>
+                        <Color red="0.8965200185775757" green="0.8555999994277954" blue="0.9300000071525574" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5077208490205707">
+                     <color>
+                        <Color red="0.18479999899864197" green="0.5779200196266174" blue="0.8399999737739563" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.7529411911964417" green="0.7529411911964417" blue="0.7764706015586853" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="441.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="331.0" text="Bridging sign language and digital" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="20.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="471.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="communication using AI-powered gesture" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Label alignment="TOP_LEFT" layoutX="192.0" layoutY="491.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="recognition." textAlignment="JUSTIFY" textFill="WHITE">
+      <Label alignment="TOP_LEFT" layoutX="208.0" layoutY="501.0" lineSpacing="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="37.0" prefWidth="373.0" text="recognition." textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <VBox layoutX="825.0" layoutY="169.0" prefHeight="150.0" prefWidth="441.0">
-         <children>
-            <Rectangle arcHeight="12.0" arcWidth="12.0" height="150.0" layoutX="825.0" layoutY="169.0" opacity="0.36" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" width="441.0">
-               <fill>
-                  <LinearGradient endX="1.0" endY="1.0" startY="1.0">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.47865171604736184">
-                           <color>
-                              <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.5658591149669887">
-                           <color>
-                              <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
-                           </color>
-                        </Stop>
-                        <Stop offset="0.5995934959349594">
-                           <color>
-                              <Color red="0.1178399994969368" green="0.07919999957084656" blue="0.18000000715255737" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-               <effect>
-                  <DropShadow />
-               </effect>
-            </Rectangle>
-            <Label text="Label" />
-         </children>
-      </VBox>
+      <Rectangle arcHeight="12.0" arcWidth="12.0" height="150.0" layoutX="845.0" layoutY="179.0" opacity="0.36" smooth="false" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" width="441.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.47865171604736184">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5658591149669887">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow>
+               <input>
+                  <InnerShadow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Label alignment="TOP_LEFT" layoutX="1006.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="230.0" style="-fx-font-family: 500;" text="Gesture Detected" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" layoutX="1006.0" layoutY="258.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="222.0" style="-fx-font-family: 500;" text="Hand movement captured" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Label>
+      <Circle fill="#07e420" layoutX="1248.0" layoutY="235.0" radius="8.0" stroke="#07e42000" strokeType="INSIDE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.027450980618596077" green="0.8941176533699036" blue="0.125490203499794" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Circle>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#50a5de4d" height="120.0" layoutX="860.0" layoutY="195.0" stroke="#2f94d8" strokeType="INSIDE" width="120.0" />
+      <ImageView fitHeight="95.57" fitWidth="61.0" layoutX="890.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Union%20(Stroke).png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="95.57" fitWidth="61.0" layoutX="890.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Union%20(Stroke)%20-%20Copy.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="95.57" fitWidth="61.0" layoutX="890.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Union%20(Stroke)%20-%20Copy%20(2).png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#50a5de4d" height="120.0" layoutX="860.0" layoutY="371.0" stroke="#2f94d8" strokeType="INSIDE" width="120.0" />
+      <Rectangle arcHeight="12.0" arcWidth="12.0" height="150.0" layoutX="856.0" layoutY="360.0" opacity="0.36" smooth="false" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" width="441.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.47865171604736184">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5658591149669887">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow>
+               <input>
+                  <InnerShadow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <ImageView fitHeight="80.0" fitWidth="80.0" layoutX="880.0" layoutY="390.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Component%209.png" />
+         </image>
+      </ImageView>
+      <Label alignment="TOP_LEFT" layoutX="1006.0" layoutY="393.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="230.0" style="-fx-font-family: 500;" text="Transating..." textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+      </Label>
+      <Circle fill="#268099" layoutX="1248.0" layoutY="411.0" radius="8.0" stroke="#07e42000" strokeType="INSIDE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.14901961386203766" green="0.501960813999176" blue="0.6000000238418579" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Circle>
+      <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="1006.0" layoutY="434.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="222.0" style="-fx-font-family: 500;" text="AI processing real time" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Label>
+      <Rectangle arcHeight="12.0" arcWidth="12.0" height="150.0" layoutX="860.0" layoutY="532.0" opacity="0.36" smooth="false" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" width="441.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0" startY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.47865171604736184">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="0.5658591149669887">
+                     <color>
+                        <Color red="0.11764705926179886" green="0.0784313753247261" blue="0.18039216101169586" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.37254902720451355" green="0.250980406999588" blue="0.5803921818733215" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+         <effect>
+            <DropShadow>
+               <input>
+                  <InnerShadow />
+               </input>
+            </DropShadow>
+         </effect>
+      </Rectangle>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#50a5de4d" height="120.0" layoutX="860.0" layoutY="547.0" stroke="#2f94d8" strokeType="INSIDE" width="120.0" />
+      <ImageView fitHeight="100.0" fitWidth="60.0" layoutX="890.0" layoutY="574.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/T.png" />
+         </image>
+      </ImageView>
+      <Label alignment="TOP_LEFT" layoutX="995.0" layoutY="569.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="230.0" style="-fx-font-family: 500;" text="Text Output" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="24.0" />
+         </font>
+      </Label>
+      <Label alignment="TOP_LEFT" contentDisplay="TOP" layoutX="1006.0" layoutY="610.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="222.0" style="-fx-font-family: 500;" text="Hello, I’m Chimera" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Label>
+      <Circle fill="#07e420" layoutX="1248.0" layoutY="587.0" radius="8.0" stroke="#07e42000" strokeType="INSIDE">
+         <effect>
+            <DropShadow>
+               <color>
+                  <Color red="0.027450980618596077" green="0.8941176533699036" blue="0.125490203499794" />
+               </color>
+            </DropShadow>
+         </effect>
+      </Circle>
+      <Button layoutX="406.0" layoutY="567.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="87.0" text="Learn More" />
+      <Button contentDisplay="GRAPHIC_ONLY" layoutX="206.0" layoutY="552.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="135.0" text="Start Translating">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding></Button>
+      <ImageView fitHeight="50.0" fitWidth="170.0" layoutX="197.0" layoutY="549.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../assets/Frame%2034.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>
