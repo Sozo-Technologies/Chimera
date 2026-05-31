@@ -14,6 +14,7 @@ import org.json.simple.parser.JSONParser;
 import org.sozotech.ml.preprocess.HandData;
 import org.sozotech.ml.preprocess.Matrix;
 import org.sozotech.ml.translation.TranslationUnit;
+import org.sozotech.utils.core.Terminal;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -105,13 +106,14 @@ public class WSClient implements WebSocket.Listener {
             }
 
             HandData hand = Matrix.parse(json);
+
             translator.feedFrame(hand);
 
             if (hand.isPresent()) {
                 JSONArray lmArray = extractLandmarkArray(json);
                 if (lmArray != null) Platform.runLater(() -> renderHands(lmArray));
             } else {
-                Platform.runLater(() -> clearCanvas());
+                Platform.runLater(this::clearCanvas);
             }
 
         } catch (Exception ignored) {}
