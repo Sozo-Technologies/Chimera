@@ -36,12 +36,12 @@
       </Rectangle>
       <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../assets/background.jpg" />
+            <Image url="@../background.jpg" />
          </image>
       </ImageView>
       <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../assets/logo-in-page.png" />
+            <Image url="@../logo-in-page.png" />
          </image>
       </ImageView>
       <HBox alignment="CENTER_RIGHT" layoutX="100.0" layoutY="40.0" prefHeight="50.0" prefWidth="1262.0" style="-fx-spacing: 100;;">
@@ -73,17 +73,17 @@
             <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="120.0" layoutX="20.0" layoutY="365.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(79, 165, 223, .3); -fx-stroke: rgba(47, 148, 216, 1);" width="120.0" />
             <ImageView fitHeight="100.0" fitWidth="63.0" layoutX="52.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../assets/Union%20(Stroke).png" />
+                  <Image url="@../Union%20(Stroke).png" />
                </image>
             </ImageView>
             <ImageView fitHeight="99.0" fitWidth="71.0" layoutX="45.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../assets/Loading.png" />
+                  <Image url="@../Loading.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="99.0" fitWidth="71.0" layoutX="44.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../assets/T.png" />
+                  <Image url="@../T.png" />
                </image>
             </ImageView>
             <Label layoutX="170.0" layoutY="32.0" prefHeight="53.0" prefWidth="188.0" text="Gesture Detected" textFill="WHITE" wrapText="true">
