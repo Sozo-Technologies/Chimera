@@ -11,7 +11,6 @@ REQUIRED_LIBRARIES = {
     "cv2": "opencv-python"
 }
 
-
 def ensure_package(module_name, package_name):
     try:
         importlib.import_module(module_name)
@@ -21,10 +20,8 @@ def ensure_package(module_name, package_name):
         subprocess.check_call([sys.executable, "-m", "pip", "install", package_name])
         print(f"[PS]: Installed {package_name}")
 
-
 for module, package in REQUIRED_LIBRARIES.items():
     ensure_package(module, package)
-
 
 import websockets
 import mediapipe as mp
@@ -35,13 +32,13 @@ from pathlib import Path
 from mediapipe.tasks import python
 from mediapipe.tasks.python import vision
 
-BaseOptions = python.BaseOptions
-HandLandmarker = vision.HandLandmarker
+BaseOptions           = python.BaseOptions
+HandLandmarker        = vision.HandLandmarker
 HandLandmarkerOptions = vision.HandLandmarkerOptions
-VisionRunningMode = vision.RunningMode
+VisionRunningMode     = vision.RunningMode
 
 MODEL_PATH = Path(sys.argv[1]).resolve()
-print(f"MODEL PATH: {MODEL_PATH}", flush=True)
+print(f"[PS]: MODEL PATH: {MODEL_PATH}", flush=True)
 
 options = HandLandmarkerOptions(
     base_options=BaseOptions(model_asset_path=str(MODEL_PATH)),
@@ -50,8 +47,13 @@ options = HandLandmarkerOptions(
 )
 
 detector = HandLandmarker.create_from_options(options)
-
 frame_id = 0
+
+EMPTY_RESPONSE = json.dumps({
+    "landmarks":  [{} for _ in range(21)],
+    "world":      [{} for _ in range(21)],
+    "visibility": [0.0] * 21
+}, separators=(",", ":"))
 
 
 def validate_frame(message):
@@ -67,19 +69,27 @@ def validate_frame(message):
     channels = int.from_bytes(message[8:12], "big")
     image_bytes = message[12:]
 
-    expected_size = width * height * channels
+    expected = width * height * channels
 
-    if len(image_bytes) != expected_size:
-        print(f"[PS]: Frame mismatch (expected={expected_size}, got={len(image_bytes)})")
+    if len(image_bytes) != expected:
+        print(f"[PS]: Frame mismatch (expected={expected}, got={len(image_bytes)})")
         return None
 
     return width, height, channels, image_bytes
 
 
+def safe_visibility(lm):
+    for attr in ("presence", "visibility", "score"):
+        val = getattr(lm, attr, None)
+        if val is not None:
+            return round(float(val), 4)
+    return 1.0
+
+
 def extract_left_hand(frame):
     global frame_id
 
-    rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+    rgb      = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     mp_image = mp.Image(image_format=mp.ImageFormat.SRGB, data=rgb)
 
     frame_id += 1
@@ -88,20 +98,18 @@ def extract_left_hand(frame):
     if not result.hand_landmarks:
         return None
 
-    TARGET_LABEL = "Left"
-
     for i, handedness_list in enumerate(result.handedness):
-        if handedness_list[0].category_name != TARGET_LABEL:
+        if handedness_list[0].category_name != "Left":
             continue
 
-        img_landmarks   = result.hand_landmarks[i]
-        world_landmarks = result.hand_world_landmarks[i]
+        img_lm   = result.hand_landmarks[i]
+        world_lm = result.hand_world_landmarks[i]
 
-        landmarks   = []
-        world       = []
-        visibility  = []
+        landmarks  = []
+        world      = []
+        visibility = []
 
-        for lm, wlm in zip(img_landmarks, world_landmarks):
+        for lm, wlm in zip(img_lm, world_lm):
             landmarks.append({
                 "x": round(lm.x, 6),
                 "y": round(lm.y, 6),
@@ -112,7 +120,7 @@ def extract_left_hand(frame):
                 "y": round(wlm.y, 6),
                 "z": round(wlm.z, 6)
             })
-            visibility.append(round(lm.presence, 4))
+            visibility.append(safe_visibility(lm))
 
         return {
             "landmarks":  landmarks,
@@ -128,30 +136,33 @@ async def handler(websocket):
 
     while True:
         try:
-            message = await websocket.recv()
+            message   = await websocket.recv()
             validated = validate_frame(message)
 
             if validated is None:
+                await websocket.send(EMPTY_RESPONSE)
                 continue
 
             width, height, channels, image_bytes = validated
 
-            frame = np.frombuffer(image_bytes, dtype=np.uint8).reshape((height, width, channels))
+            frame = np.frombuffer(
+                image_bytes, dtype=np.uint8
+            ).reshape((height, width, channels))
+
             hand = extract_left_hand(frame)
 
             if hand is None:
-                await websocket.send("{}")
-                continue
-
-            await websocket.send(json.dumps(hand, separators=(",", ":")))
+                await websocket.send(EMPTY_RESPONSE)
+            else:
+                await websocket.send(json.dumps(hand, separators=(",", ":")))
 
         except websockets.ConnectionClosed:
             print("[PS]: Client Disconnected")
             break
 
         except Exception as e:
-            print(f"[PS]: ERROR: {e}")
-            break
+            print(f"[PS]: ERROR: {e}", flush=True)
+            await websocket.send(EMPTY_RESPONSE)
 
 
 async def main():

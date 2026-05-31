@@ -70,7 +70,7 @@ public class TranslationUnit {
 
         if (debugMode) System.out.println(sanitizer.debug(raw));
 
-        if (sentence.length() > 0) sentence.append(' ');
+        if (!sentence.isEmpty()) sentence.append(' ');
         sentence.append(clean);
         history.reset();
     }

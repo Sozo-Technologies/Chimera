@@ -32,6 +32,8 @@ public class WSClient implements WebSocket.Listener {
     private final Canvas canvas;
     private final TranslationUnit translator;
 
+    private final StringBuilder messageBuffer = new StringBuilder();
+
     private volatile String latestJson;
     private volatile Consumer<String> oneShotCallback = null;
     private final Object callbackLock = new Object();
@@ -47,10 +49,10 @@ public class WSClient implements WebSocket.Listener {
                 .thenAccept(ws -> {
                     this.socket = ws;
                     readyLatch.countDown();
-                    System.out.println("WebSocket connected");
+                    Terminal.info("[WSClient] WebSocket connected");
                 })
                 .exceptionally(ex -> {
-                    System.err.println("[WSClient] Connection failed: " + ex.getMessage());
+                    Terminal.error("[WSClient] Connection failed: " + ex.getMessage());
                     readyLatch.countDown();
                     return null;
                 });
@@ -75,7 +77,7 @@ public class WSClient implements WebSocket.Listener {
 
     public void sendOnce(byte[] packet, Consumer<String> callback) {
         if (awaitReady()) {
-            System.err.println("[WSClient] sendOnce: socket not ready");
+            Terminal.error("[WSClient] sendOnce: socket not ready");
             callback.accept(null);
             return;
         }
@@ -87,8 +89,17 @@ public class WSClient implements WebSocket.Listener {
 
     @Override
     public CompletionStage<?> onText(WebSocket ws, CharSequence data, boolean last) {
+        messageBuffer.append(data);
+
+        if (!last) {
+            ws.request(1);
+            return null;
+        }
+
+        String json = messageBuffer.toString();
+        messageBuffer.setLength(0);
+
         try {
-            String json = data.toString();
             if (json.isBlank()) { ws.request(1); return null; }
 
             latestJson = json;
@@ -111,12 +122,14 @@ public class WSClient implements WebSocket.Listener {
 
             if (hand.isPresent()) {
                 JSONArray lmArray = extractLandmarkArray(json);
-                if (lmArray != null) Platform.runLater(() -> renderHands(lmArray));
+                if (lmArray != null) Platform.runLater(() -> renderLandmarks(lmArray));
             } else {
                 Platform.runLater(this::clearCanvas);
             }
 
-        } catch (Exception ignored) {}
+        } catch (Exception e) {
+            Terminal.error("[WSClient] onText parse error: " + e.getMessage());
+        }
 
         ws.request(1);
         return null;
@@ -128,6 +141,7 @@ public class WSClient implements WebSocket.Listener {
             JSONObject root = (JSONObject) parser.parse(json);
             return (JSONArray) root.get("landmarks");
         } catch (Exception e) {
+            Terminal.error("[WSClient] extractLandmarkArray failed: " + e.getMessage());
             return null;
         }
     }
@@ -137,7 +151,7 @@ public class WSClient implements WebSocket.Listener {
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
     }
 
-    private void renderHands(JSONArray landmarks) {
+    private void renderLandmarks(JSONArray landmarks) {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         gc.clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
         gc.setFill(Color.RED);
@@ -167,13 +181,13 @@ public class WSClient implements WebSocket.Listener {
 
     @Override
     public void onOpen(WebSocket webSocket) {
-        System.out.println("WS Open");
+        Terminal.info("[WSClient] WS Open");
         webSocket.request(1);
     }
 
     @Override
     public void onError(WebSocket webSocket, Throwable error) {
-        error.printStackTrace();
+        Terminal.error("[WSClient] WS Error", error);
     }
 
     public void close() {
