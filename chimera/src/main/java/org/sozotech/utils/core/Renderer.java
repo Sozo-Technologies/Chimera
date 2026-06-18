@@ -38,7 +38,7 @@ public class Renderer {
                 currentPage.onUnmount();
                 currentPage = null;
             }
-        } catch (Exception _) {}
+        } catch (Exception e) {}
     }
 
     public void render(Page page, Transition transition, String hexColor, String path) {
