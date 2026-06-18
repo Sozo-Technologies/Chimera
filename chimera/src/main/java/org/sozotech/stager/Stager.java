@@ -37,7 +37,7 @@ public class Stager {
             installPythonSilently(installerPath);
             System.out.println("[Stager] Python installation completed.");
 
-        } catch (Exception _) {
+        } catch (Exception e) {
             System.out.println("[Stager] Installation failed.");
         }
     }

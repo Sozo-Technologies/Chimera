@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.BoxBlur?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1462.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.018400000408291817" green="0.018400000408291817" blue="0.23000000417232513" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3803921639919281" green="0.0117647061124444" blue="0.6274510025978088" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Rectangle fill="#ffffff1a" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/background.jpg" />
+         </image>
+         <effect>
+            <BoxBlur />
+         </effect>
+      </ImageView>
+      <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../assets/logo-in-page.png" />
+         </image>
+      </ImageView>
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#613f7080" height="660.0" layoutX="440.0" layoutY="128.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="0.0" width="966.0" />
+      <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#00000080" height="553.0" layoutX="450.0" layoutY="142.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="0.0" width="590.0" />
+      <Rectangle id="Proceed" arcHeight="10.0" arcWidth="10.0" fill="#ffffff66" height="65.0" layoutX="450.0" layoutY="708.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="590.0" />
+      <Rectangle id="Proceed" arcHeight="10.0" arcWidth="10.0" fill="#b994d466" height="65.0" layoutX="1057.0" layoutY="708.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="336.0" />
+      <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#00000080" height="161.0" layoutX="1057.0" layoutY="534.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="0.0" width="336.0" />
+      <Rectangle id="Proceed" arcHeight="10.0" arcWidth="10.0" fill="#b692d140" height="383.0" layoutX="1057.0" layoutY="142.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="336.0" />
+      <Rectangle arcHeight="10.0" arcWidth="10.0" fill="#613f7080" height="660.0" layoutX="57.0" layoutY="128.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="0.0" width="371.0" />
+      <Rectangle arcHeight="12.0" arcWidth="12.0" fill="#00000080" height="631.0" layoutX="67.0" layoutY="142.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="0.0" width="350.0" />
+      <Rectangle arcHeight="35.0" arcWidth="35.0" fill="#d9d9d980" height="30.0" layoutX="107.0" layoutY="450.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="235.0" />
+      <Circle fill="#d9d9d980" layoutX="350.0" layoutY="476.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#d9d9d980" layoutX="360.0" layoutY="476.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <Circle fill="#d9d9d980" layoutX="370.0" layoutY="476.0" radius="3.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+      <HBox alignment="CENTER_RIGHT" layoutX="100.0" layoutY="40.0" prefHeight="50.0" prefWidth="1262.0" style="-fx-spacing: 100;;">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="Home" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 33; -fx-border-width: 3; -fx-border-color: ffffff; -fx-border-radius: 33;" text="Tools" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="About" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1462.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.018400000408291817" green="0.018400000408291817" blue="0.23000000417232513" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3803921639919281" green="0.0117647061124444" blue="0.6274510025978088" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../logo-in-page.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_RIGHT" layoutX="100.0" layoutY="40.0" prefHeight="50.0" prefWidth="1262.0" style="-fx-spacing: 100;;">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 33; -fx-border-width: 3; -fx-border-color: ffffff; -fx-border-radius: 33;" text="Home" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="Tools" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="About" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <AnchorPane layoutX="836.0" layoutY="169.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="510.0" prefWidth="450.0">
+         <children>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="10.0" layoutY="10.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" style="-fx-fill: linear-gradient(to right,rgba(95,64,148,.5) 0%,rgba(30,20,46,.5) 45%,rgba(30,20,46,.5) 55%,rgba(95,64,148,.5) 100%); -fx-arc-height: 24; -fx-arc-width: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.5, 5, 15);" width="430.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="10.0" layoutY="180.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" style="-fx-fill: linear-gradient(to right,rgba(95,64,148,.5) 0%,rgba(30,20,46,.5) 45%,rgba(30,20,46,.5) 55%,rgba(95,64,148,.5) 100%); -fx-arc-height: 24; -fx-arc-width: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.5, 5, 15);" width="430.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="150.0" layoutX="10.0" layoutY="350.0" stroke="#5f4094" strokeType="INSIDE" strokeWidth="1.5" style="-fx-fill: linear-gradient(to right,rgba(95,64,148,.5) 0%,rgba(30,20,46,.5) 45%,rgba(30,20,46,.5) 55%,rgba(95,64,148,.5) 100%); -fx-arc-height: 24; -fx-arc-width: 24; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.5, 5, 15);" width="430.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="120.0" layoutX="20.0" layoutY="25.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(79, 165, 223, .3); -fx-stroke: rgba(47, 148, 216, 1);" width="120.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="120.0" layoutX="20.0" layoutY="195.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(79, 165, 223, .3); -fx-stroke: rgba(47, 148, 216, 1);" width="120.0" />
+            <Rectangle arcHeight="20.0" arcWidth="20.0" fill="DODGERBLUE" height="120.0" layoutX="20.0" layoutY="365.0" stroke="BLACK" strokeType="INSIDE" style="-fx-fill: rgba(79, 165, 223, .3); -fx-stroke: rgba(47, 148, 216, 1);" width="120.0" />
+            <ImageView fitHeight="100.0" fitWidth="63.0" layoutX="52.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Union%20(Stroke).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="71.0" layoutX="45.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Loading.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="99.0" fitWidth="71.0" layoutX="44.0" layoutY="388.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../T.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="170.0" layoutY="32.0" prefHeight="53.0" prefWidth="188.0" text="Gesture Detected" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="170.0" layoutY="201.0" prefHeight="53.0" prefWidth="143.0" text="Translating..." textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="170.0" layoutY="372.0" prefHeight="53.0" prefWidth="134.0" text="Text Output" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold Italic" size="24.0" />
+               </font>
+            </Label>
+            <Circle fill="#ff2121" layoutX="394.0" layoutY="228.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="#1fff38" layoutX="395.0" layoutY="58.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Circle fill="#1fff38" layoutX="396.0" layoutY="400.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <Label layoutX="170.0" layoutY="84.0" prefHeight="33.0" prefWidth="224.0" text="Hand movement captured" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="168.0" layoutY="255.0" prefHeight="33.0" prefWidth="231.0" text="AI processing in real-tine" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="170.0" layoutY="426.0" prefHeight="33.0" prefWidth="212.0" text="Hi, I'm chimera" textFill="WHITE" wrapText="true">
+               <font>
+                  <Font name="Segoe UI Semibold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <HBox alignment="CENTER" layoutX="180.0" layoutY="544.0" prefHeight="67.0" prefWidth="308.0" style="-fx-spacing: 20;">
+         <children>
+            <Button alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="50.0" prefWidth="170.0" style="-fx-background-color: linear-gradient(    to bottom right,    rgba(79,165,223,0.25),    rgba(0,111,185,0.20)); -fx-background-radius: 12; -fx-border-color: rgba(47, 148, 216, 1); -fx-border-radius: 12; -fx-border-width: 1;" text="Start Translating" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="14.0" />
+               </font></Button>
+            <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(    to bottom right,    rgba(79,165,223,0.15),    rgba(0,111,185,0)); -fx-background-radius: 12; -fx-border-color: rgba(47, 148, 216, 1); -fx-border-radius: 12; -fx-border-width: 1;" text="Learn more." textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Semibold Italic" size="14.0" />
+               </font></Button>
+         </children>
+      </HBox>
+      <Label layoutX="170.0" layoutY="276.0" prefHeight="73.0" prefWidth="568.0" style="-fx-text-fill: linear-gradient(    to right,    #E7D9F1 0%,    #2F94D8 50%,    #C0C0C6 100%); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.5, 5, 15);" text="Gesture to Text" textFill="#e5daed" wrapText="true">
+         <font>
+            <Font name="Segoe UI Bold" size="72.0" />
+         </font>
+      </Label>
+      <Label layoutX="170.0" layoutY="340.0" prefHeight="65.0" prefWidth="568.0" style="-fx-text-fill: linear-gradient(    to right,    #E7D9F1 0%,    #2F94D8 50%,    #C0C0C6 100%); -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 15, 0.5, 5, 15);" text="Translation" textFill="#e5daed" wrapText="true">
+         <font>
+            <Font name="Segoe UI Bold" size="72.0" />
+         </font>
+      </Label>
+      <Label layoutX="180.0" layoutY="411.0" prefHeight="133.0" prefWidth="414.0" text="Bridging sign language and digital communication using AI-powered gesture recognition." textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semilight" size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="175.0" layoutY="235.0" prefHeight="29.0" prefWidth="170.0" text="Real-Time" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI Semibold" size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

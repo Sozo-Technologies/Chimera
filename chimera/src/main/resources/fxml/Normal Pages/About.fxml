@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1462.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.018400000408291817" green="0.018400000408291817" blue="0.23000000417232513" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3803921639919281" green="0.0117647061124444" blue="0.6274510025978088" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/logo-in-page.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_RIGHT" layoutX="100.0" layoutY="40.0" prefHeight="50.0" prefWidth="1262.0" style="-fx-spacing: 100;;">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="Home" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(255,255,255,0);" text="Tools" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 33; -fx-border-width: 3; -fx-border-color: ffffff; -fx-border-radius: 33;" text="About" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <ScrollPane layoutX="50.0" layoutY="137.0" prefHeight="670.0" prefWidth="1362.0" style="-fx-background-color: transparent;; -fx-background: transparent;;">
+         <content>
+            <AnchorPane prefHeight="1000.0" prefWidth="1362.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="275.0" layoutX="50.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgba(184, 146, 209, 0.3); -fx-arc-height: 24; -fx-arc-width: 24;" width="1262.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="210.0" layoutX="50.0" layoutY="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgba(184, 146, 209, 0.3); -fx-arc-height: 24; -fx-arc-width: 24;" width="1262.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="245.0" layoutX="50.0" layoutY="525.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgba(184, 146, 209, 0.3); -fx-arc-height: 24; -fx-arc-width: 24;" width="1262.0" />
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="240.0" layoutX="50.0" layoutY="785.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" style="-fx-fill: rgba(184, 146, 209, 0.3); -fx-arc-height: 24; -fx-arc-width: 24;" width="1262.0" />
+                  <Label layoutX="63.0" layoutY="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="46.0" prefWidth="157.0" text="About Us">
+                     <font>
+                        <Font name="Segoe UI Bold Italic" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7333333492279053" green="0.5764706134796143" blue="0.8352941274642944" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.8256397664647784">
+                                 <color>
+                                    <Color red="0.4588235318660736" green="0.5764706134796143" blue="0.843137264251709" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.5803921818733215" blue="0.729411780834198" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="62.0" prefHeight="61.0" prefWidth="1252.0" style="-fx-text-fill: white;;" text="The                                    is a group of student developers working together to build an system that translates hand signs into readable text in real time." textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="131.0" prefHeight="74.0" prefWidth="1249.0" style="-fx-text-fill: white;;" text="We are passionate about exploring computer vision, and human-computer interaction, while also improving our skills in software development and teamwork." textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="207.0" prefHeight="73.0" prefWidth="1254.0" style="-fx-text-fill: white;;" text="This project is part of our academic journey, where we aim to combine learning with real-world application. Each member contributes ideas, code, testing, and documentation to help the system grow." textFill="WHITE" wrapText="true">
+                     <font>
+                        <Font name="Segoe UI" size="24.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="104.0" layoutY="60.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="232.0" text="Chimera Project Team" textAlignment="CENTER">
+                     <font>
+                        <Font name="Segoe UI Bold" size="22.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7333333492279053" green="0.5764706134796143" blue="0.8352941274642944" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.8256397664647784">
+                                 <color>
+                                    <Color red="0.4588235318660736" green="0.5764706134796143" blue="0.843137264251709" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.5803921818733215" blue="0.729411780834198" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="294.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="157.0" text="Our Goal">
+                     <font>
+                        <Font name="Segoe UI Bold Italic" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7333333492279053" green="0.5764706134796143" blue="0.8352941274642944" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.8256397664647784">
+                                 <color>
+                                    <Color red="0.4588235318660736" green="0.5764706134796143" blue="0.843137264251709" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.5803921818733215" blue="0.729411780834198" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="63.0" layoutY="348.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="38.0" prefWidth="388.0" text="Our goal is to create a system that: " textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="97.0" layoutY="388.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="36.0" prefWidth="480.0" text="Helps bridge communication through hand gestures" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="97.0" layoutY="422.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="33.0" prefWidth="653.0" text="Improves accessibility for sign-based communication" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="96.0" layoutY="452.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="544.0" text="Encourages collaboration and learning among students" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="81.0" layoutY="403.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="81.0" layoutY="436.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="81.0" layoutY="470.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Label layoutX="58.0" layoutY="519.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="61.0" prefWidth="319.0" text="What We Believe">
+                     <font>
+                        <Font name="Segoe UI Bold Italic" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7333333492279053" green="0.5764706134796143" blue="0.8352941274642944" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.8256397664647784">
+                                 <color>
+                                    <Color red="0.4588235318660736" green="0.5764706134796143" blue="0.843137264251709" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.5803921818733215" blue="0.729411780834198" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="61.0" layoutY="584.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="377.0" text="We believe that:" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="67.0" layoutY="623.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Label layoutX="83.0" layoutY="605.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="1144.0" text="Learning happens best through building real projects" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="67.0" layoutY="661.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="67.0" layoutY="696.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="67.0" layoutY="734.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Label layoutX="83.0" layoutY="642.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="1147.0" text="Every contributor has something valuable to offer" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="84.0" layoutY="678.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="1150.0" text="Technology should help people communicate better" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="83.0" layoutY="715.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="1133.0" text="Open collaboration leads to better innovation" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="60.0" layoutY="780.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="57.0" prefWidth="301.0" text="Members">
+                     <font>
+                        <Font name="Segoe UI Bold Italic" size="36.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.7333333492279053" green="0.5764706134796143" blue="0.8352941274642944" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="0.8256397664647784">
+                                 <color>
+                                    <Color red="0.4588235318660736" green="0.5764706134796143" blue="0.843137264251709" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="0.35686275362968445" green="0.5803921818733215" blue="0.729411780834198" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+                  <Label layoutX="87.0" layoutY="838.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1144.0" text="Rafael Luis Oli - Lead Developer / System Engineer (Project Leader)" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="70.0" layoutY="861.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="70.0" layoutY="899.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="70.0" layoutY="934.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="70.0" layoutY="972.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Rectangle arcHeight="20.0" arcWidth="20.0" fill="WHITE" height="6.0" layoutX="70.0" layoutY="1010.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="6.0" />
+                  <Label layoutX="87.0" layoutY="875.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1144.0" text="Daniela Mikaela Sadile - Assistant Developer (Frontend Support)" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="87.0" layoutY="912.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1144.0" text="Kyle Flancia - Assistant Developer (Backend / Integration)" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="87.0" layoutY="949.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1144.0" text="Zehreel Vhares Escarilla - Flexible Developer (UI / Testing Support)" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="87.0" layoutY="984.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1144.0" text="Matthew Labrada - QA Tester / Documentation" textFill="WHITE">
+                     <font>
+                        <Font name="Segoe UI" size="20.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

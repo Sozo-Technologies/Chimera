@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="840.0" prefWidth="1462.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Rectangle fill="#1a1a28" height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0" />
+      <Rectangle height="840.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="1462.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color red="0.018400000408291817" green="0.018400000408291817" blue="0.23000000417232513" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="0.3803921639919281" green="0.0117647061124444" blue="0.6274510025978088" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <ImageView fitHeight="840.0" fitWidth="1485.0" opacity="0.5" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/background.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.5" fitWidth="170.0" layoutX="88.0" layoutY="32.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/logo-in-page.png" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="231.5" layoutY="455.0" prefHeight="82.0" prefWidth="999.0" text="Failed to load the content. Please try again." textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="249.0" fitWidth="268.0" layoutX="597.0" layoutY="230.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../assets/Error%20Logo.png" />
+         </image>
+      </ImageView>
+      <HBox alignment="CENTER_RIGHT" layoutX="100.0" layoutY="40.0" prefHeight="50.0" prefWidth="1262.0" style="-fx-spacing: 100;;">
+         <children>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="Home" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 33; -fx-border-width: 3; -fx-border-color: ffffff; -fx-border-radius: 33;" text="Tools" textFill="WHITE">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+            <Button alignment="CENTER" contentDisplay="CENTER" layoutX="62.0" layoutY="10.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="130.0" style="-fx-background-color: rgba(97,63,112,0);" text="About" textFill="#ffffffbf">
+               <font>
+                  <Font name="Segoe UI Bold" size="20.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+      <Button layoutX="581.0" layoutY="544.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="300.0" style="-fx-background-color: transparent; -fx-border-color: ffffff; -fx-border-width: 3; -fx-border-radius: 12;" text="Try again" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI Bold" size="28.0" />
+         </font>
+         <effect>
+            <Glow level="0.1" />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
